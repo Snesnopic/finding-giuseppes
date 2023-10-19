@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D0E126A2AE13A3200F6C9F5 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */; };
 		9D1523992AE12802000F9762 /* GoalShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1523982AE12802000F9762 /* GoalShelfApp.swift */; };
 		9D15239B2AE12802000F9762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15239A2AE12802000F9762 /* ContentView.swift */; };
 		9D15239D2AE12802000F9762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D15239C2AE12802000F9762 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
 		9D1523952AE12802000F9762 /* GoalShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoalShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1523982AE12802000F9762 /* GoalShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalShelfApp.swift; sourceTree = "<group>"; };
 		9D15239A2AE12802000F9762 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				9D15239A2AE12802000F9762 /* ContentView.swift */,
 				9D15239C2AE12802000F9762 /* Assets.xcassets */,
 				9D15239E2AE12802000F9762 /* Preview Content */,
+				9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */,
 			);
 			path = GoalShelf;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			files = (
 				9D15239B2AE12802000F9762 /* ContentView.swift in Sources */,
 				9D1523992AE12802000F9762 /* GoalShelfApp.swift in Sources */,
+				9D0E126A2AE13A3200F6C9F5 /* GoalListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
