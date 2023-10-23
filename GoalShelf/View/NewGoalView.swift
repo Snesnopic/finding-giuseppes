@@ -18,7 +18,7 @@ struct NewGoalView: View {
     var disabled: [Color] = [.white, .gray]
     
     @State private var goalName: String = ""
-    @State private var goalType: goalEnum = .education
+    @State private var goalType: GoalEnum = .education
     @State private var goalDescription: String = ""
     var body: some View {
         
