@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Combine
 
 struct NewGoalView: View {
     
     @Environment (\.presentationMode) var presentation
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    let textLimit = 22
     let disabled: [Color] = [.white, .gray]
     
     @State private var goalName: String = ""
@@ -20,7 +22,7 @@ struct NewGoalView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 9){
             Text("Goal Name").font(.caption).foregroundStyle(.gray)
-            TextField("Lose weight", text: $goalName).textFieldStyle(.roundedBorder)
+            TextField("Lose weight", text: $goalName).textFieldStyle(.roundedBorder).onReceive(Just(goalName)) { _ in limitText(textLimit) }
             Text("Goal Description").font(.caption).foregroundStyle(.gray)
             TextField("Losing 5 kg in 2 months!", text: $goalDescription).textFieldStyle(.roundedBorder)
             
@@ -106,6 +108,14 @@ struct NewGoalView: View {
         .opacity(goalName.isEmpty || goalDescription.isEmpty ? 0.5 : 1)
     }
     
+    
+    
+    
+    func limitText(_ upper: Int) {
+            if goalName.count > upper {
+                goalName = String(goalName.prefix(upper))
+            }
+        }
 }
 
 
