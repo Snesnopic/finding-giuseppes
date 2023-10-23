@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		9D0E126A2AE13A3200F6C9F5 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */; };
+		9D1393E02AE673C00026EAC6 /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DC2AE673C00026EAC6 /* GoalViewModel.swift */; };
+		9D1393E12AE673C00026EAC6 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */; };
+		9D1393E22AE673C00026EAC6 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DE2AE673C00026EAC6 /* GoalView.swift */; };
+		9D1393E32AE673C00026EAC6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DF2AE673C00026EAC6 /* Task.swift */; };
 		9D1523992AE12802000F9762 /* GoalShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1523982AE12802000F9762 /* GoalShelfApp.swift */; };
 		9D15239B2AE12802000F9762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15239A2AE12802000F9762 /* ContentView.swift */; };
 		9D15239D2AE12802000F9762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D15239C2AE12802000F9762 /* Assets.xcassets */; };
@@ -16,6 +20,10 @@
 
 /* Begin PBXFileReference section */
 		9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
+		9D1393DC2AE673C00026EAC6 /* GoalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
+		9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
+		9D1393DE2AE673C00026EAC6 /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		9D1393DF2AE673C00026EAC6 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		9D1523952AE12802000F9762 /* GoalShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoalShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1523982AE12802000F9762 /* GoalShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalShelfApp.swift; sourceTree = "<group>"; };
 		9D15239A2AE12802000F9762 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +61,10 @@
 		9D1523972AE12802000F9762 /* GoalShelf */ = {
 			isa = PBXGroup;
 			children = (
+				9D1393DE2AE673C00026EAC6 /* GoalView.swift */,
+				9D1393DC2AE673C00026EAC6 /* GoalViewModel.swift */,
+				9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */,
+				9D1393DF2AE673C00026EAC6 /* Task.swift */,
 				9D1523982AE12802000F9762 /* GoalShelfApp.swift */,
 				9D15239A2AE12802000F9762 /* ContentView.swift */,
 				9D15239C2AE12802000F9762 /* Assets.xcassets */,
@@ -141,7 +153,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D15239B2AE12802000F9762 /* ContentView.swift in Sources */,
+				9D1393E22AE673C00026EAC6 /* GoalView.swift in Sources */,
+				9D1393E02AE673C00026EAC6 /* GoalViewModel.swift in Sources */,
+				9D1393E12AE673C00026EAC6 /* NewGoalView.swift in Sources */,
 				9D1523992AE12802000F9762 /* GoalShelfApp.swift in Sources */,
+				9D1393E32AE673C00026EAC6 /* Task.swift in Sources */,
 				9D0E126A2AE13A3200F6C9F5 /* GoalListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
