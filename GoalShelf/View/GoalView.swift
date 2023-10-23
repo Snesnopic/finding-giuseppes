@@ -49,6 +49,7 @@ struct GoalView: View {
             }.sheet(isPresented: $showModal){
                 NewGoalView().presentationDetents([.height(700)])
                     .presentationCornerRadius(30)
+                    .presentationDragIndicator(.visible)
             }
             
 
