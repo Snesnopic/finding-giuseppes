@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B6DFCF02AE672A300C1F54B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DFCEF2AE672A300C1F54B /* Task.swift */; };
-		6B6DFCF22AE672B400C1F54B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DFCF12AE672B400C1F54B /* Goal.swift */; };
-		6B6DFCF42AE672D200C1F54B /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DFCF32AE672D200C1F54B /* GoalViewModel.swift */; };
-		6B6DFCF62AE6734500C1F54B /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DFCF52AE6734500C1F54B /* NewGoalView.swift */; };
-		6B6DFCF82AE6735F00C1F54B /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DFCF72AE6735F00C1F54B /* GoalView.swift */; };
 		9D0E126A2AE13A3200F6C9F5 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */; };
+		9D1393E02AE673C00026EAC6 /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DC2AE673C00026EAC6 /* GoalViewModel.swift */; };
+		9D1393E12AE673C00026EAC6 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */; };
+		9D1393E22AE673C00026EAC6 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DE2AE673C00026EAC6 /* GoalView.swift */; };
+		9D1393E32AE673C00026EAC6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393DF2AE673C00026EAC6 /* Task.swift */; };
+		9D1393E72AE674940026EAC6 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1393E62AE674940026EAC6 /* Goal.swift */; };
 		9D1523992AE12802000F9762 /* GoalShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1523982AE12802000F9762 /* GoalShelfApp.swift */; };
 		9D15239B2AE12802000F9762 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15239A2AE12802000F9762 /* ContentView.swift */; };
 		9D15239D2AE12802000F9762 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D15239C2AE12802000F9762 /* Assets.xcassets */; };
@@ -20,12 +20,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6B6DFCEF2AE672A300C1F54B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		6B6DFCF12AE672B400C1F54B /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
-		6B6DFCF32AE672D200C1F54B /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
-		6B6DFCF52AE6734500C1F54B /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
-		6B6DFCF72AE6735F00C1F54B /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
+		9D1393DC2AE673C00026EAC6 /* GoalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
+		9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
+		9D1393DE2AE673C00026EAC6 /* GoalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		9D1393DF2AE673C00026EAC6 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		9D1393E62AE674940026EAC6 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		9D1523952AE12802000F9762 /* GoalShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoalShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1523982AE12802000F9762 /* GoalShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalShelfApp.swift; sourceTree = "<group>"; };
 		9D15239A2AE12802000F9762 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,13 +63,13 @@
 		9D1523972AE12802000F9762 /* GoalShelf */ = {
 			isa = PBXGroup;
 			children = (
+				9D1393E62AE674940026EAC6 /* Goal.swift */,
+				9D1393DE2AE673C00026EAC6 /* GoalView.swift */,
+				9D1393DC2AE673C00026EAC6 /* GoalViewModel.swift */,
+				9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */,
+				9D1393DF2AE673C00026EAC6 /* Task.swift */,
 				9D1523982AE12802000F9762 /* GoalShelfApp.swift */,
 				9D15239A2AE12802000F9762 /* ContentView.swift */,
-				6B6DFCF52AE6734500C1F54B /* NewGoalView.swift */,
-				6B6DFCF72AE6735F00C1F54B /* GoalView.swift */,
-				6B6DFCEF2AE672A300C1F54B /* Task.swift */,
-				6B6DFCF12AE672B400C1F54B /* Goal.swift */,
-				6B6DFCF32AE672D200C1F54B /* GoalViewModel.swift */,
 				9D15239C2AE12802000F9762 /* Assets.xcassets */,
 				9D15239E2AE12802000F9762 /* Preview Content */,
 				9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */,
@@ -155,14 +155,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B6DFCF02AE672A300C1F54B /* Task.swift in Sources */,
+				9D1393E72AE674940026EAC6 /* Goal.swift in Sources */,
 				9D15239B2AE12802000F9762 /* ContentView.swift in Sources */,
+				9D1393E22AE673C00026EAC6 /* GoalView.swift in Sources */,
+				9D1393E02AE673C00026EAC6 /* GoalViewModel.swift in Sources */,
+				9D1393E12AE673C00026EAC6 /* NewGoalView.swift in Sources */,
 				9D1523992AE12802000F9762 /* GoalShelfApp.swift in Sources */,
-				6B6DFCF62AE6734500C1F54B /* NewGoalView.swift in Sources */,
-				6B6DFCF22AE672B400C1F54B /* Goal.swift in Sources */,
+				9D1393E32AE673C00026EAC6 /* Task.swift in Sources */,
 				9D0E126A2AE13A3200F6C9F5 /* GoalListView.swift in Sources */,
-				6B6DFCF42AE672D200C1F54B /* GoalViewModel.swift in Sources */,
-				6B6DFCF82AE6735F00C1F54B /* GoalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

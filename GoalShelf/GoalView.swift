@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomePageView: View {
+struct GoalView: View {
     @State var showModal = false
     var viewModel = GoalViewModel()
     

@@ -8,10 +8,10 @@
 import Foundation
 
 struct Goal: Identifiable{
-    var id = UUID()
-    var type: String
-    var name: String
-    var description: String
+    let id = UUID()
+    var type:String //to change to enum
+    var name:String
+    var description:String
     var tasks: [Task]
     
     //add time variable

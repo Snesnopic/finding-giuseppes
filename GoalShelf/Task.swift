@@ -8,9 +8,8 @@
 import Foundation
 
 struct Task: Identifiable{
-    var id = UUID()
-    var name: String
-    var description: String
-    
+    let id = UUID()
+    var name:String;
+    var description:String;
     //add repeatability
 }
