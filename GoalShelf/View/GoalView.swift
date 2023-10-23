@@ -18,20 +18,24 @@ struct GoalView: View {
                 ForEach(viewModel.goals){
                     goal in
                     ZStack{
-                               
-                        RoundedRectangle(cornerRadius: 25.0).fill(.white
-                        ).shadow(radius: 8)
-                        HStack{
-                            
-                            
-                            Image(systemName: symbolMap[goal.type]!)
-                                .font(.title)
-                                .foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                            
-                            Text(goal.name).font(.title2)
-                            Spacer()
-                        }.padding()
-                        
+                          
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            ZStack{
+                                
+                                RoundedRectangle(cornerRadius: 25.0).fill(.white).shadow(radius: 10).padding(.vertical, -10)
+                                    
+                                Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
+                                
+                                
+                              
+                                    HStack{
+                                        Image(systemName: symbolMap[goal.type]!).font(.title).foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                        Text(goal.name).font(.title2).foregroundStyle(.black)
+                                    }.padding(.horizontal, -170)
+                                
+                                
+                            }
+                        })
                         
                     }.padding()
                 
