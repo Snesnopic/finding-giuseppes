@@ -19,19 +19,17 @@ struct GoalView: View {
                     goal in
                     ZStack{
                           
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        NavigationLink(destination: GoalDetailView(goal: goal), label: {
                             ZStack{
                                 
                                 RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical, -10).shadow(radius: 5)
-                                    
+                                
                                 Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
-                                              
-                                    HStack{
-                                        Image(systemName: symbolMap[goal.type]!).font(.title).foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                        Text(goal.name).font(.title2).foregroundStyle(.black)
-                                    }.padding(.horizontal, -170)
                                 
-                                
+                                HStack{
+                                    Image(systemName: symbolMap[goal.type]!).font(.title).foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                    Text(goal.name).font(.title2).foregroundStyle(.black)
+                                }.padding(.horizontal, -170)
                             }
                         })
                         
