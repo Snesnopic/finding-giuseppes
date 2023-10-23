@@ -59,9 +59,6 @@ struct GoalView: View {
             
 
         }
-        
-        
-                
     }
 }
 
