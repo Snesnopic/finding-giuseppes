@@ -23,20 +23,12 @@ struct GoalView: View {
                         ).shadow(radius: 8)
                         HStack{
                             
-                            if(goal.type == .health){
-                                Image(systemName: "leaf").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.lightHealth, .strongHealth], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            }
-                            if(goal.type == .work){
-                                Image(systemName: "bag").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.lightWork, .strongWork], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            }
-                            if(goal.type == .education){
-                                Image(systemName: "books.vertical").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.lightEducation, .strongEducation], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            }
-                            if(goal.type == .special){
-                                Image(systemName: "fireworks").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.red,.orange,.yellow,.green,.blue,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            }
                             
-                            Text(goal.name).font(.title)
+                            Image(systemName: symbolMap[goal.type]!)
+                                .font(.title)
+                                .foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                            
+                            Text(goal.name).font(.title2)
                             Spacer()
                         }.padding()
                         

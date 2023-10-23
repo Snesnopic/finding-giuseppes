@@ -11,6 +11,6 @@ class GoalViewModel
 {
     var goals = [
         Goal(type: .health, name: "Lose weight", description: "Lose 5kg in 2 months", tasks: []),
-        Goal(type: .work, name: "Finisn", description: "Finish the project 10 days before the deadline", tasks: [])
+        Goal(type: .work, name: "Finish something", description: "Finish the project 10 days before the deadline", tasks: [])
     ]
 }

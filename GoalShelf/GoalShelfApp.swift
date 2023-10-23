@@ -15,8 +15,8 @@ struct GoalShelfApp: App {
                 GoalView().tabItem {
                     VStack
                     {
-                        Image(systemName: "fireworks")
-                        Text("Learners")
+                        Image(systemName: "flag.fill")
+                        Text("Goals")
                     } }.tag(1)
                 GoalListView().tabItem {
                     VStack{
