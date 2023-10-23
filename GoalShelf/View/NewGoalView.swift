@@ -73,7 +73,7 @@ struct NewGoalView: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: workSelected ? colorMap[.work]! : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
-                    Image(systemName: symbolMap[.education]!)
+                    Image(systemName: symbolMap[.work]!)
                     Text(GoalEnum.work.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).onTapGesture {
