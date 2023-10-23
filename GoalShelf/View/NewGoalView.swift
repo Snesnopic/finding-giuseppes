@@ -26,27 +26,27 @@ struct NewGoalView: View {
         /*Idk why but this button down below isn't working.
          Probably the spacers fucked it up
          -Giuseppe C
-        */
+         */
         
         /*
-        VStack(){
-            Button(action: {
-                presentation.wrappedValue.dismiss()
-            }, label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title)
-                    .tint(.red).padding(.horizontal, -180)
-            })
-        }
+         VStack(){
+         Button(action: {
+         presentation.wrappedValue.dismiss()
+         }, label: {
+         Image(systemName: "xmark.circle.fill")
+         .font(.title)
+         .tint(.red).padding(.horizontal, -180)
+         })
+         }
          */
         
         VStack(alignment: .leading, spacing: 9){
-            Text("Goal Name").font(.caption).foregroundStyle(.gray).padding(.horizontal)
-            TextField("Lose weight", text: $goalName).padding(.vertical, 12).padding(.horizontal, 15).background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-            Text("Goal Description").font(.caption).foregroundStyle(.gray).padding(.horizontal)
-            TextField("Losing 5 kg in 2 months!", text: $goalDescription).padding(.vertical, 12).padding(.horizontal, 15).background(.white.shadow(.drop(color: .black.opacity(0.25), radius: 2)), in: .rect(cornerRadius: 10))
-                  
-            }.padding()
+            Text("Goal Name").font(.caption).foregroundStyle(.gray)
+            TextField("Lose weight", text: $goalName).textFieldStyle(.roundedBorder)
+            Text("Goal Description").font(.caption).foregroundStyle(.gray)
+            TextField("Losing 5 kg in 2 months!", text: $goalDescription).textFieldStyle(.roundedBorder)
+            
+        }.padding()
         
         Spacer().frame(height: 10)
         
@@ -128,36 +128,31 @@ struct NewGoalView: View {
                     }
                 }
             }
-
+            
         }
         
-        Spacer().frame(height: 200)
         Button(action: {
             let newGoal = Goal(type: goalType, name: goalName, description: goalDescription, tasks: [])
             
             do {
-                
                 try managedObjectContext.save()
             } catch {
                 
             }
         }, label: {
-            ZStack{
-                RoundedRectangle(cornerRadius: 25.0).frame(width: 300, height: 30).foregroundStyle(.yellow).shadow(radius: 10)
-                
-                Text("Create Goal")
+            Text("Create")
                 .font(.title3)
                 .fontWeight(.semibold)
                 .textScale(.secondary)
-                .foregroundStyle(.black)
-        }
+                .foregroundStyle(.blue)
+            
         })
         .disabled(goalName.isEmpty || goalDescription.isEmpty)
         .opacity(goalName.isEmpty || goalDescription.isEmpty ? 0.5 : 1)
     }
-        
-        }
     
+}
+
 
 
 #Preview {
