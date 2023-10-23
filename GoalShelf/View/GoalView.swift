@@ -19,20 +19,20 @@ struct GoalView: View {
                     goal in
                     ZStack{
                                
-                        RoundedRectangle(cornerRadius: 25.0).size(CGSize(width: 360.0, height: 100.0)).fill(.white
+                        RoundedRectangle(cornerRadius: 25.0).fill(.white
                         ).shadow(radius: 8)
                         HStack{
                             
-                            if(goal.type == "Health"){
+                            if(goal.type == .health){
                                 Image(systemName: "leaf").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.lightHealth, .strongHealth], startPoint: .topLeading, endPoint: .bottomTrailing))
                             }
-                            if(goal.type == "Work"){
+                            if(goal.type == .work){
                                 Image(systemName: "bag").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.lightWork, .strongWork], startPoint: .topLeading, endPoint: .bottomTrailing))
                             }
-                            if(goal.type == "Education"){
+                            if(goal.type == .education){
                                 Image(systemName: "books.vertical").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.lightEducation, .strongEducation], startPoint: .topLeading, endPoint: .bottomTrailing))
                             }
-                            if(goal.type == "Special"){
+                            if(goal.type == .special){
                                 Image(systemName: "fireworks").font(.largeTitle).foregroundStyle(LinearGradient(colors: [.red,.orange,.yellow,.green,.blue,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
                             }
                             
@@ -63,5 +63,5 @@ struct GoalView: View {
 }
 
 #Preview {
-    HomePageView()
+    GoalView()
 }

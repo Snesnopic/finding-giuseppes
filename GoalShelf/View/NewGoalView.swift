@@ -18,7 +18,7 @@ struct NewGoalView: View {
     var disabled: [Color] = [.white, .gray]
     
     @State private var goalName: String = ""
-    @State private var goalType: String = "Education"
+    @State private var goalType: goalEnum = .education
     @State private var goalDescription: String = ""
     var body: some View {
         
@@ -62,7 +62,7 @@ struct NewGoalView: View {
                 withAnimation(.linear(duration: 0.5)){
                     if(eduSelected == false){
                         eduSelected.toggle()
-                        goalType = "Education"
+                        goalType = .education
                         workSelected = false
                         healthSelected = false
                         specialSelected = false
@@ -80,7 +80,7 @@ struct NewGoalView: View {
                 withAnimation(.linear(duration: 0.5)){
                     if(workSelected == false){
                         workSelected.toggle()
-                        goalType = "Work"
+                        goalType = .health
                         eduSelected = false
                         healthSelected = false
                         specialSelected = false
@@ -100,7 +100,7 @@ struct NewGoalView: View {
                 withAnimation(.linear(duration: 0.5)){
                     if(healthSelected == false){
                         healthSelected.toggle()
-                        goalType = "Health"
+                        goalType = .health
                         eduSelected = false
                         workSelected = false
                         specialSelected = false
@@ -121,7 +121,7 @@ struct NewGoalView: View {
                 withAnimation(.linear(duration: 0.5)){
                     if(specialSelected == false){
                         specialSelected.toggle()
-                        goalType = "Special"
+                        goalType = .special
                         eduSelected = false
                         healthSelected = false
                         workSelected = false
