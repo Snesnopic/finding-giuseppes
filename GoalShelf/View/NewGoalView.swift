@@ -31,9 +31,9 @@ struct NewGoalView: View {
         HStack{
             
             ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .education ? colorMap[.education]! : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .education ? GoalEnum.education.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
-                    Image(systemName: symbolMap[.education]!)
+                    Image(systemName: GoalEnum.education.symbol)
                     Text(GoalEnum.education.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).onTapGesture {
@@ -44,9 +44,9 @@ struct NewGoalView: View {
             }
             Spacer().frame(width: 15)
             ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .work ? colorMap[.work]! : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .work ? GoalEnum.work.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
-                    Image(systemName: symbolMap[.work]!)
+                    Image(systemName: GoalEnum.work.symbol)
                     Text(GoalEnum.work.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).onTapGesture {
@@ -58,9 +58,9 @@ struct NewGoalView: View {
         
         HStack{
             ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .health ? colorMap[.health]! : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .health ? GoalEnum.health.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
-                    Image(systemName: symbolMap[.health]!)
+                    Image(systemName: GoalEnum.health.symbol)
                     Text(GoalEnum.health.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: 10).onTapGesture {
@@ -71,12 +71,12 @@ struct NewGoalView: View {
             Spacer().frame(width: 15)
             ZStack{
                 Color.white.clipShape(RoundedRectangle(cornerRadius: 25.0)).shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).frame(width: 180, height: 100)
-                RoundedRectangle(cornerRadius: 25.0).stroke(lineWidth: 2.0).fill(LinearGradient(colors: goalType == .special ? colorMap[.special]! : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).stroke(lineWidth: 2.0).fill(LinearGradient(colors: goalType == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack
                 {
-                    Image(systemName: symbolMap[.special]!)
+                    Image(systemName: GoalEnum.special.symbol)
                     Text(GoalEnum.special.rawValue)
-                }.foregroundStyle(LinearGradient(colors: goalType == .special ? colorMap[.special]! : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                }.foregroundStyle(LinearGradient(colors: goalType == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
                 
             }.onTapGesture {
                 withAnimation(.linear(duration: 0.5)){

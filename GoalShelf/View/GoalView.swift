@@ -27,7 +27,7 @@ struct GoalView: View {
                                 Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
                                 
                                 HStack{
-                                    Image(systemName: symbolMap[goal.type]!).font(.title).foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                    Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
                                     Text(goal.name).font(.title2).foregroundStyle(.black)
                                 }.padding(.horizontal, -170)
                             }

@@ -23,18 +23,29 @@ enum GoalEnum : String{
     case work = "Work"
     case health = "Health"
     case special = "Special"
+    
+    var symbol: String {
+        switch self {
+        case .education:
+            "books.vertical"
+        case .work:
+            "bag"
+        case .health:
+            "leaf"
+        case .special:
+            "fireworks"
+        }
+    }
+    var colors: [Color] {
+        switch self {
+        case .education:
+            [Color.lightEducation, Color.strongEducation]
+        case .work:
+            [Color.lightWork, Color.strongWork]
+        case .health:
+            [Color.lightHealth, Color.strongHealth]
+        case .special:
+            [.red,.orange,.yellow,.green,.blue,.purple]
+        }
+    }
 }
-
-var colorMap: [GoalEnum: [Color]] = [
-    GoalEnum.education : [Color.lightEducation, Color.strongEducation],
-    GoalEnum.work : [Color.lightWork, Color.strongWork],
-    GoalEnum.health : [Color.lightHealth, Color.strongHealth],
-    GoalEnum.special : [.red,.orange,.yellow,.green,.blue,.purple]
-    ]
-
-var symbolMap: [GoalEnum: String] = [
-    GoalEnum.education : "books.vertical",
-    GoalEnum.work : "bag",
-    GoalEnum.health : "leaf",
-    GoalEnum.special : "fireworks"
-]
