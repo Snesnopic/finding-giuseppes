@@ -22,12 +22,10 @@ struct GoalView: View {
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             ZStack{
                                 
-                                RoundedRectangle(cornerRadius: 25.0).fill(.white).shadow(radius: 10).padding(.vertical, -10)
+                                RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical, -10).shadow(radius: 5)
                                     
                                 Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
-                                
-                                
-                              
+                                              
                                     HStack{
                                         Image(systemName: symbolMap[goal.type]!).font(.title).foregroundStyle(LinearGradient(colors: colorMap[goal.type]!, startPoint:.topLeading, endPoint:.bottomTrailing))
                                         Text(goal.name).font(.title2).foregroundStyle(.black)
