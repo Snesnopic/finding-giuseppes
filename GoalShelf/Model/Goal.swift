@@ -33,7 +33,7 @@ var colorMap: [GoalEnum: [Color]] = [
     ]
 
 var symbolMap: [GoalEnum: String] = [
-    GoalEnum.education : "vertical.books",
+    GoalEnum.education : "books.vertical",
     GoalEnum.work : "bag",
     GoalEnum.health : "leaf",
     GoalEnum.special : "fireworks"
