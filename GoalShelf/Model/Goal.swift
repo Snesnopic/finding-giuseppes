@@ -7,16 +7,22 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
+
+
+
 
 struct Goal: Identifiable{
     let id = UUID()
     var type: GoalEnum
     var name:String
-    var description:String
+    var adescription:String
     var tasks: [Task]
+    
     
     //add time variable
 }
+
 
 enum GoalEnum : String{
     case education = "Education"

@@ -11,7 +11,6 @@ import Combine
 struct NewGoalView: View {
     
     @Environment (\.presentationMode) var presentation
-    @Environment(\.managedObjectContext) var managedObjectContext
     
     let textLimit = 35
     let disabled: [Color] = [.white, .gray]
@@ -89,13 +88,7 @@ struct NewGoalView: View {
         }
         
         Button(action: {
-            let newGoal = Goal(type: goalType, name: goalName, description: goalDescription, tasks: [])
             
-            do {
-                try managedObjectContext.save()
-            } catch {
-                
-            }
         }, label: {
             Text("Create")
                 .font(.title3)

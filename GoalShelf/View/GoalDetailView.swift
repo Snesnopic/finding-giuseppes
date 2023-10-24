@@ -18,7 +18,7 @@ struct GoalDetailView: View {
             
             VStack{
                 Text("Goal description").font(.title2)
-                Text(goal.description)
+                Text(goal.adescription)
             }
     
             Text("Goal-related tasks").font(.title2)
@@ -37,5 +37,5 @@ struct GoalDetailView: View {
 
 
 #Preview {
-    GoalDetailView(goal: Goal(type: .health, name: "Lose weight", description: "Lose 5kg in 2 months in order to be ready for the fitness competition", tasks: [Task(name: "Following Dr. Ascanio's diet", description: "Follow the diet the doctor gave me, even when everybody around me is eating delicious unhealthy food!")]))
+    GoalDetailView(goal: Goal(type: .health, name: "Lose weight", adescription: "Lose 5kg in 2 months in order to be ready for the fitness competition", tasks: [Task(name: "Following Dr. Ascanio's diet", description: "Follow the diet the doctor gave me, even when everybody around me is eating delicious unhealthy food!")]))
 }
