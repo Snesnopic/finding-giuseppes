@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Task: Identifiable{
-    let id = UUID()
-    var name:String;
-    var description:String;
+struct Task: Codable, Identifiable {
+    var id = UUID()
+    var name:String = ""
+    var description:String  = ""
     var isCompleted:Bool = false
     //add repeatability
 }

@@ -10,26 +10,35 @@ import SwiftUI
 import SwiftData
 
 
-
-
-struct Goal: Identifiable{
+@Model
+class Goal: Identifiable{
+    
     let id = UUID()
     var type: GoalEnum
     var name:String
     var adescription:String
     var tasks: [Task]
-    mutating func toggle(_ task:Task) {
+    func toggle(_ task:Task) {
         let index:Int? = tasks.firstIndex{$0.id == task.id}
         if(index != nil)
         {
             tasks[index!].isCompleted.toggle()
         }
     }
+    
+    init(type: GoalEnum, name: String, adescription: String, tasks: [Task]) {
+        self.type = type
+        self.name = name
+        self.adescription = adescription
+        self.tasks = tasks
+    }
+    
+    
     //add time variable
 }
 
 
-enum GoalEnum : String{
+enum GoalEnum : String, Codable {
     case education = "Education"
     case work = "Work"
     case health = "Health"

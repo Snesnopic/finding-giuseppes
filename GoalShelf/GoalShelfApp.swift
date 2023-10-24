@@ -6,9 +6,27 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct GoalShelfApp: App {
+    
+    
+    //inizializzare il container PRIMA dell'avvio dell'app
+     let modelContainer: ModelContainer
+    
+     init(){
+        do{
+            modelContainer = try ModelContainer(for: Goal.self)
+        } catch{
+            fatalError()
+        }
+        
+    }
+    
+    
+    
+     
     var body: some Scene {
         WindowGroup {
             TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
@@ -27,5 +45,7 @@ struct GoalShelfApp: App {
             }
             
         }
+        .modelContainer(modelContainer)
+        
     }
 }

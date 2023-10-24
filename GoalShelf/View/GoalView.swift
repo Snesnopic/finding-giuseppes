@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GoalView: View {
     @State var showModal = false
@@ -13,10 +14,10 @@ struct GoalView: View {
     
     var body: some View {
         NavigationStack{
-        
-        ScrollView{
-            ForEach(viewModel.goals){
-                goal in
+            
+            ScrollView{
+                ForEach(viewModel.goals){
+                    goal in
                     
                     NavigationLink(destination: GoalDetailView(goal: goal), label: {
                         ZStack(alignment: .topLeading){
@@ -35,30 +36,28 @@ struct GoalView: View {
                             
                         }.padding()
                     })
-                    
+                }
                 
-                
-                
-            }.navigationTitle("My Goals").toolbar{
+            }
+            .navigationTitle("My Goals").toolbar{
                 Button(action: {
                     showModal = true
                 }, label: {
                     Image(systemName: "plus.circle")
                 })
             }
+            .sheet(isPresented: $showModal){
+                NewGoalView().presentationDetents([.height(700)])
+                    .presentationCornerRadius(30)
+                    .presentationDragIndicator(.visible)
+            }
             
             
-        }.sheet(isPresented: $showModal){
-            NewGoalView().presentationDetents([.height(700)])
-                .presentationCornerRadius(30)
-                .presentationDragIndicator(.visible)
         }
-        
-        
     }
-}
 }
 
 #Preview {
     GoalView()
+        .modelContainer(for : Goal.self)
 }
