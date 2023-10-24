@@ -13,46 +13,47 @@ struct GoalView: View {
     
     var body: some View {
         NavigationStack{
-            
-            ScrollView{
-                ForEach(viewModel.goals){
-                    goal in
-                    ZStack{
-                          
-                        NavigationLink(destination: GoalDetailView(goal: goal), label: {
-                            ZStack{
+        
+        ScrollView{
+            ForEach(viewModel.goals){
+                goal in
+                ZStack{
+                    
+                    NavigationLink(destination: GoalDetailView(goal: goal), label: {
+                        ZStack(alignment: .topLeading){
+                            
+                            RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                                                        
+                            HStack{
+                                Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                Text(goal.name).font(.title2).foregroundStyle(.black)
                                 
-                                RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical, -10).shadow(radius: 5)
-                                
-                                Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
-                                
-                                HStack{
-                                    Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                    Text(goal.name).font(.title2).foregroundStyle(.black)
-                                }.padding(.horizontal, -170)
-                            }
-                        })
-                        
-                    }.padding()
-                
-                }.navigationTitle("My Goals").toolbar{
-                    Button(action: {
-                        showModal = true
-                    }, label: {
-                        Image(systemName: "plus.circle")
+                            }.padding(.horizontal)
+                            
+                            
+                        }
                     })
-                }
-               
+                    Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
+                }.padding()
                 
-            }.sheet(isPresented: $showModal){
-                NewGoalView().presentationDetents([.height(700)])
-                    .presentationCornerRadius(30)
-                    .presentationDragIndicator(.visible)
+            }.navigationTitle("My Goals").toolbar{
+                Button(action: {
+                    showModal = true
+                }, label: {
+                    Image(systemName: "plus.circle")
+                })
             }
             
-
+            
+        }.sheet(isPresented: $showModal){
+            NewGoalView().presentationDetents([.height(700)])
+                .presentationCornerRadius(30)
+                .presentationDragIndicator(.visible)
         }
+        
+        
     }
+}
 }
 
 #Preview {

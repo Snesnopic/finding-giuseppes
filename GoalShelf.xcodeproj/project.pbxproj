@@ -56,8 +56,8 @@
 		9D1393EA2AE67A5D0026EAC6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6BF05D2F2AE6CCB000340E5D /* GoalDetailView.swift */,
 				9D1393DE2AE673C00026EAC6 /* GoalView.swift */,
+				6BF05D2F2AE6CCB000340E5D /* GoalDetailView.swift */,
 				9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */,
 				9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */,
 			);

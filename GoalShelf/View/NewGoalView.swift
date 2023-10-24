@@ -13,7 +13,7 @@ struct NewGoalView: View {
     @Environment (\.presentationMode) var presentation
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    let textLimit = 22
+    let textLimit = 35
     let disabled: [Color] = [.white, .gray]
     
     @State private var goalName: String = ""
