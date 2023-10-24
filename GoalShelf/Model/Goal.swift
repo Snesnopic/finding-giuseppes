@@ -18,8 +18,13 @@ struct Goal: Identifiable{
     var name:String
     var adescription:String
     var tasks: [Task]
-    
-    
+    mutating func toggle(_ task:Task) {
+        let index:Int? = tasks.firstIndex{$0.id == task.id}
+        if(index != nil)
+        {
+            tasks[index!].isCompleted.toggle()
+        }
+    }
     //add time variable
 }
 
