@@ -11,6 +11,10 @@ import Combine
 struct NewGoalView: View {
     
     @Environment (\.presentationMode) var presentation
+    @Environment (\.modelContext) private var context
+    @Environment (\.dismiss) private var dismiss
+    
+    
     
     let textLimit = 35
     let disabled: [Color] = [.white, .gray]
@@ -88,7 +92,9 @@ struct NewGoalView: View {
         }
         
         Button(action: {
-            
+            addGoal()
+            dismiss()
+                
         }, label: {
             Text("Create")
                 .font(.title3)
@@ -109,6 +115,12 @@ struct NewGoalView: View {
                 goalName = String(goalName.prefix(upper))
             }
         }
+    
+    func addGoal(){
+        let newGoal = Goal(type: goalType, name: goalName, adescription: goalDescription, tasks: [])
+        
+        context.insert(newGoal)
+    }
 }
 
 

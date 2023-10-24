@@ -10,16 +10,17 @@ import SwiftData
 
 struct GoalView: View {
     @State var showModal = false
-    var viewModel = GoalViewModel()
+    @Query private var goals: [Goal]
     
     var body: some View {
         NavigationStack{
             
             ScrollView{
-                ForEach(viewModel.goals){
+                ForEach(goals){
                     goal in
-                    
+         
                     NavigationLink(destination: GoalDetailView(goal: goal), label: {
+                        
                         ZStack(alignment: .topLeading){
                             
                             RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
@@ -34,14 +35,15 @@ struct GoalView: View {
                             }.padding(.horizontal)
                             
                             
+                            
                         }.padding()
                     })
                 }
-                
             }
             .navigationTitle("My Goals").toolbar{
                 Button(action: {
                     showModal = true
+                    
                 }, label: {
                     Image(systemName: "plus.circle")
                 })
