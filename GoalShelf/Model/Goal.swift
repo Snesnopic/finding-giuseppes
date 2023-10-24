@@ -38,7 +38,7 @@ class Goal: Identifiable{
 }
 
 
-enum GoalEnum : String, Codable, CaseIterable {
+enum GoalEnum : String, Codable {
     case education = "Education"
     case work = "Work"
     case health = "Health"
