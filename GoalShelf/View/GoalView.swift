@@ -17,24 +17,27 @@ struct GoalView: View {
         ScrollView{
             ForEach(viewModel.goals){
                 goal in
-                ZStack{
                     
                     NavigationLink(destination: GoalDetailView(goal: goal), label: {
                         ZStack(alignment: .topLeading){
                             
                             RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
-                                                        
+                            
                             HStack{
                                 Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
                                 Text(goal.name).font(.title2).foregroundStyle(.black)
                                 
+                                Spacer()
+                                Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                
                             }.padding(.horizontal)
                             
                             
-                        }
+                        }.padding()
                     })
-                    Image(systemName: "chevron.right").foregroundStyle(.black).frame(width: 330, alignment: .trailing)
-                }.padding()
+                    
+                
+                
                 
             }.navigationTitle("My Goals").toolbar{
                 Button(action: {
