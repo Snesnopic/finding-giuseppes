@@ -13,13 +13,14 @@ struct NewTaskView: View {
     @State private var newTask:Task = Task()
     @State private var showRepetition:Bool = true
     @State private var selectedDays = Set<WeekDaysEnum>()
+    @Environment(\.dismiss) var dismiss
     let textLimit = 35
     var body: some View {
         
         VStack(spacing: 10.0){
-            Text("Task Name").font(.caption).foregroundStyle(.gray)
+            Text("Task Name").font(.caption).opacity(0.8)
             TextField("Visit grandma", text: $newTask.name).textFieldStyle(.roundedBorder).onReceive(Just(newTask.name)) { _ in limitText(textLimit) }
-            Text("Task Description").font(.caption).foregroundStyle(.gray)
+            Text("Task Description").font(.caption).opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
             TextField("She's gonna make that delicious cake!", text: $newTask.description).textFieldStyle(.roundedBorder)
             Toggle(isOn: $showRepetition, label: {
                 Text("Repeatable")
@@ -84,8 +85,8 @@ struct NewTaskView: View {
             LabeledStepper("How many weeks (TODO)",value: $newTask.repetitionPermanence).opacity(showRepetition ? 1.0 : 0.0).padding(.vertical)
             
             Button(action: {
-               
-                    
+                goal.tasks.append(newTask)
+                dismiss()
             }, label: {
                 Text("Create")
                     .font(.title3)
