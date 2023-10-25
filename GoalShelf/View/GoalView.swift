@@ -119,7 +119,7 @@ struct GoalView: View {
                 }),
                 
                 trailing: Button(action: {
-                    self.isEditing.toggle()
+                    showModal.toggle()
                 }, label: {
                     Image(systemName: "plus.circle")
                 })
