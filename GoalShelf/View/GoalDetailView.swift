@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GoalDetailView: View {
     @State var goal: Goal
+    @State var showCreateTask:Bool = false
     var body: some View {
         NavigationStack{
             VStack{
@@ -23,14 +24,22 @@ struct GoalDetailView: View {
                             goal.toggle(task)
                         }, label: {
                             HStack {
-                                Image(systemName:  task.isCompleted ? "circle.fill":"circle")
+                                Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
                                 Text(task.name)
                             }
-                        })
+                        }).foregroundStyle(.primary)
                         
                         
                 }
             }.navigationBarTitle(goal.name, displayMode: .inline)
+                .navigationBarItems(trailing: Button(action: {
+                    showCreateTask.toggle()
+                }, label: {
+                    Image(systemName: "plus.circle")
+                }).sheet(isPresented: $showCreateTask, content: {
+                    NewTaskView(goal: goal).presentationDragIndicator(.visible)
+                }))
+                
         }
         
     }
