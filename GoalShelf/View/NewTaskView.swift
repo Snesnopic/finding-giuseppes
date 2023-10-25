@@ -16,7 +16,7 @@ struct NewTaskView: View {
     let textLimit = 35
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 10.0){
+        VStack(spacing: 10.0){
             Text("Task Name").font(.caption).foregroundStyle(.gray)
             TextField("Visit grandma", text: $newTask.name).textFieldStyle(.roundedBorder).onReceive(Just(newTask.name)) { _ in limitText(textLimit) }
             Text("Task Description").font(.caption).foregroundStyle(.gray)
@@ -82,6 +82,20 @@ struct NewTaskView: View {
             
             
             LabeledStepper("How many weeks (TODO)",value: $newTask.repetitionPermanence).opacity(showRepetition ? 1.0 : 0.0).padding(.vertical)
+            
+            Button(action: {
+               
+                    
+            }, label: {
+                Text("Create")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .textScale(.secondary)
+                    .foregroundStyle(.blue)
+                
+            })
+            .disabled(newTask.name.isEmpty || newTask.description.isEmpty)
+            .opacity(newTask.name.isEmpty || newTask.description.isEmpty ? 0.5 : 1)
             
         }.padding()
     }
