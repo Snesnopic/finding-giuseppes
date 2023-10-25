@@ -10,83 +10,82 @@ import SwiftData
 
 struct GoalView: View {
     @State var showModal = false
-    @State private var goalType: GoalEnum = .none
-    @Query private var goals: [Goal]
-
+    @State private var goalTypeFilter: GoalEnum? = nil
+    @Query private var allGoals: [Goal]
+    
     
     let disabled: [Color] = [.white, .gray]
     
     var body: some View {
-        
-        let filteredGoals = goals.filter(filtering)
         NavigationStack{
-        
-        HStack(alignment: .top){
-            ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(.gray).fill(LinearGradient(colors: goalType == .education ? GoalEnum.education.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+            
+            HStack(alignment: .top){
+                ZStack{
+                    RoundedRectangle(cornerRadius: 25.0).fill(.gray).fill(LinearGradient(colors: goalTypeFilter == .education ? GoalEnum.education.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                    
+                    Image(systemName: GoalEnum.education.symbol)
+                }.onTapGesture {
+                    withAnimation(.linear(duration: 0.2)){
+                        if(goalTypeFilter == .education){
+                            goalTypeFilter = nil
+                        }else{
+                            goalTypeFilter = .education
+                        }
+                    }
+                }
                 
-                Image(systemName: GoalEnum.education.symbol)
-            }.onTapGesture {
-                withAnimation(.linear(duration: 0.2)){
-                    if(goalType == .education){
-                        goalType = .none
-                    }else{
-                        goalType = .education
-                    }
-                }
-            }
-            
-            
-            ZStack {
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .work ? GoalEnum.work.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
                 
-                Image(systemName: GoalEnum.work.symbol)
-            }.onTapGesture {
-                withAnimation(.linear(duration: 0.2)){
-                    if(goalType == .work){
-                        goalType = .none
-                    }else{
-                        goalType = .work
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalTypeFilter == .work ? GoalEnum.work.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                    
+                    Image(systemName: GoalEnum.work.symbol)
+                }.onTapGesture {
+                    withAnimation(.linear(duration: 0.2)){
+                        if(goalTypeFilter == .work){
+                            goalTypeFilter = nil
+                        }else{
+                            goalTypeFilter = .work
+                        }
                     }
                 }
-            }
-            
-            
-            ZStack {
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .health ? GoalEnum.health.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
                 
-                Image(systemName: GoalEnum.health.symbol)
-            }.onTapGesture {
-                withAnimation(.linear(duration: 0.2)){
-                    if(goalType == .health){
-                        goalType = .none
-                    }else{
-                        goalType = .health
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalTypeFilter == .health ? GoalEnum.health.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                    
+                    Image(systemName: GoalEnum.health.symbol)
+                }.onTapGesture {
+                    withAnimation(.linear(duration: 0.2)){
+                        if(goalTypeFilter == .health){
+                            goalTypeFilter = nil
+                        }else{
+                            goalTypeFilter = .health
+                        }
                     }
                 }
-            }
-            
-            
-            ZStack {
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
-                Image(systemName: GoalEnum.special.symbol)
-            }.onTapGesture {
-                withAnimation(.linear(duration: 0.2)){
-                    if(goalType == .special){
-                        goalType = .none
-                    }else{
-                        goalType = .special
+                
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalTypeFilter == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                    Image(systemName: GoalEnum.special.symbol)
+                }.onTapGesture {
+                    withAnimation(.linear(duration: 0.2)){
+                        if(goalTypeFilter == .special){
+                            goalTypeFilter = nil
+                        }else{
+                            goalTypeFilter = .special
+                        }
                     }
                 }
-            }
+                
+                
+            }.padding()
+                .frame(height: 80)
+                .foregroundStyle(.white)
             
-            
-        }.padding()
-            .frame(height: 80)
-            .foregroundStyle(.white)
-        
             ScrollView{
-                ForEach(filteredGoals){
+                ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
+                {
                     goal in
                     
                     NavigationLink(destination: GoalDetailView(goal: goal), label: {
@@ -123,26 +122,8 @@ struct GoalView: View {
                     .presentationCornerRadius(30)
                     .presentationDragIndicator(.visible)
             }
-            
-            
         }
     }
-    
-    func filtering(goal: Goal) -> Bool {
-        if(goalType == .education){
-            return goal.type == .education
-        }else if(goalType == .work){
-            return goal.type == .work
-        }else if(goalType == .health){
-            return goal.type == .health
-        }else if(goalType == .special){
-            return goal.type == .special
-        }
-        else {
-            return true
-        }
-      }
-      
 }
 
 #Preview {
