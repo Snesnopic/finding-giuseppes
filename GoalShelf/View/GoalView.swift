@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct GoalView: View {
+    @Environment (\.modelContext) private var context
     @State var showModal = false
+    @State var isEditing = false
     @State private var goalTypeFilter: GoalEnum? = nil
     @Query private var allGoals: [Goal]
     
@@ -100,29 +102,39 @@ struct GoalView: View {
                                 
                                 Spacer()
                                 Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
-                                
                             }.padding(.horizontal)
                             
                             
                             
                         }.padding()
+                        
                     })
                 }
-            }
-            .navigationTitle("My Goals").toolbar{
-                Button(action: {
-                    showModal = true
-                    
+                
+            }.navigationBarItems(
+                leading: Button(action: {
+                    self.isEditing.toggle()
+                }, label: {
+                    Text(isEditing ? "Done" : "Edit")
+                }),
+                
+                trailing: Button(action: {
+                    self.isEditing.toggle()
                 }, label: {
                     Image(systemName: "plus.circle")
                 })
-            }
+            )
+            .navigationTitle("My Goals")
             .sheet(isPresented: $showModal){
                 NewGoalView().presentationDetents([.height(700)])
                     .presentationCornerRadius(30)
                     .presentationDragIndicator(.visible)
             }
         }
+    }
+    
+    func deleteGoal(_ goal: Goal){
+        context.delete(goal)
     }
 }
 
