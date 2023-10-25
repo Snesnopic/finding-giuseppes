@@ -43,7 +43,6 @@ enum GoalEnum : String, Codable {
     case work = "Work"
     case health = "Health"
     case special = "Special"
-    case none = "None"
     
     var symbol: String {
         switch self {
@@ -55,8 +54,6 @@ enum GoalEnum : String, Codable {
             "leaf"
         case .special:
             "fireworks"
-        case .none:
-            "questionmark"
         }
     }
     var colors: [Color] {
@@ -69,8 +66,6 @@ enum GoalEnum : String, Codable {
             [Color.lightHealth, Color.strongHealth]
         case .special:
             [.red,.orange,.yellow,.green,.blue,.purple]
-        case .none:
-        [.white]
         }
         
     }
