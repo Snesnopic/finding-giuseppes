@@ -25,9 +25,9 @@ struct NewGoalView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 9){
             Text("Goal Name").font(.caption).foregroundStyle(.gray)
-            TextField("Lose weight", text: $goalName).textFieldStyle(.roundedBorder).onReceive(Just(goalName)) { _ in limitText(textLimit) }
+            TextField("Finish the school project", text: $goalName).textFieldStyle(.roundedBorder).onReceive(Just(goalName)) { _ in limitText(textLimit) }
             Text("Goal Description").font(.caption).foregroundStyle(.gray)
-            TextField("Losing 5 kg in 2 months!", text: $goalDescription).textFieldStyle(.roundedBorder)
+            TextField("We're so behind...", text: $goalDescription).textFieldStyle(.roundedBorder)
             
         }.padding()
         
