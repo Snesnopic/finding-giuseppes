@@ -19,24 +19,39 @@ struct GoalDetailView: View {
             }
             
             List{
-                ForEach(goal.tasks)
+                if(goal.tasks.isEmpty)
                 {
-                    task in
-                    Button(action: {
-                        goal.toggle(task)
-                    }, label: {
+                    Section(footer:
+                                VStack {
+                        Spacer(minLength: UIScreen.main.bounds.size.height/3)
                         HStack {
-                            Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
-                            Text(task.name)
+                            Spacer()
+                            Text("Looks like you have no goals. Add some!").opacity(0.8)
+                            Spacer()
                         }
-                    }).foregroundStyle(.primary)
-                    
-                    
-                }.onDelete(
-                    
-                    perform:
-                        deleteTask
-                )
+                    }
+                    )
+                    {
+                        //empty
+                    }
+                }
+                else
+                {
+                    ForEach(goal.tasks)
+                    {
+                        task in
+                        Button(action: {
+                            goal.toggle(task)
+                        }, label: {
+                            HStack {
+                                Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
+                                Text(task.name)
+                            }
+                        }).foregroundStyle(.primary)
+                        
+                        
+                    }
+                }
             }.navigationBarTitle(goal.name, displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
                     showCreateTask.toggle()
@@ -56,5 +71,5 @@ struct GoalDetailView: View {
 }
 
 #Preview {
-    GoalDetailView(goal: Goal(type: .health, name: "Lose weight", adescription: "Lose 5kg in 2 months in order to be ready for the fitness competition", tasks: [Task(name: "Following Dr. Ascanio's diet", description: "Follow the diet the doctor gave me, even when everybody around me is eating delicious unhealthy food!")]))
+    GoalDetailView(goal: Goal(type: .health, name: "Lose weight", adescription: "Lose 5kg in 2 months in order to be ready for the fitness competition", tasks: []))
 }
