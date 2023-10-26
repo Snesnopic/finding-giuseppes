@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct GoalDetailView: View {
+    @Environment (\.modelContext) private var context
     @State var goal: Goal
     @State var showCreateTask:Bool = false
+    
     var body: some View {
         NavigationStack{
             VStack{
@@ -20,17 +22,21 @@ struct GoalDetailView: View {
                 ForEach(goal.tasks)
                 {
                     task in
-                        Button(action: {
-                            goal.toggle(task)
-                        }, label: {
-                            HStack {
-                                Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
-                                Text(task.name)
-                            }
-                        }).foregroundStyle(.primary)
-                        
-                        
-                }
+                    Button(action: {
+                        goal.toggle(task)
+                    }, label: {
+                        HStack {
+                            Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
+                            Text(task.name)
+                        }
+                    }).foregroundStyle(.primary)
+                    
+                    
+                }.onDelete(
+                    
+                    perform:
+                        deleteTask
+                )
             }.navigationBarTitle(goal.name, displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
                     showCreateTask.toggle()
@@ -39,11 +45,14 @@ struct GoalDetailView: View {
                 }).sheet(isPresented: $showCreateTask, content: {
                     NewTaskView(goal: goal).presentationDragIndicator(.visible)
                 }))
-                
+            
         }
         
     }
-
+    
+    func deleteTask(at offsets: IndexSet) {
+        goal.tasks.remove(atOffsets: offsets)
+    }
 }
 
 #Preview {
