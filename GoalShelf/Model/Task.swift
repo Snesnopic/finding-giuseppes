@@ -13,7 +13,9 @@ struct Task: Codable, Identifiable {
     var name:String = ""
     var description:String  = ""
     var isCompleted:Bool = false
+    var repeatable:Bool = false
     var repetitionCount:Int = 1 //how many times a week
     var repetitionPermanence:Int = 1 //how many weeks
+    var notificationDays = Set<WeekDaysEnum>()
     //add repeatability
 }

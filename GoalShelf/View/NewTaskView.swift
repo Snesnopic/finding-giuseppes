@@ -11,8 +11,6 @@ import Combine
 struct NewTaskView: View {
     var goal:Goal
     @State private var newTask:Task = Task()
-    @State private var showRepetition:Bool = true
-    @State private var selectedDays = Set<WeekDaysEnum>()
     @Environment(\.dismiss) var dismiss
     let textLimit = 35
     var body: some View {
@@ -22,11 +20,11 @@ struct NewTaskView: View {
             TextField("Visit grandma", text: $newTask.name).textFieldStyle(.roundedBorder).onReceive(Just(newTask.name)) { _ in limitText(textLimit) }
             Text("Task Description").font(.caption).opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
             TextField("She's gonna make that delicious cake!", text: $newTask.description).textFieldStyle(.roundedBorder)
-            Toggle(isOn: $showRepetition, label: {
+            Toggle(isOn: $newTask.repeatable, label: {
                 Text("Repeatable")
             })
             
-            LabeledStepper("Times a week", value: $newTask.repetitionCount).opacity(showRepetition ? 1.0 : 0.0).padding(.vertical)
+            LabeledStepper("Times a week", value: $newTask.repetitionCount).opacity(newTask.repeatable ? 1.0 : 0.0).padding(.vertical)
             HStack
             {
                 ForEach(WeekDaysEnum.allCases,id: \.rawValue)
@@ -34,13 +32,13 @@ struct NewTaskView: View {
                     day in
                     Button(action: {
                         withAnimation(.bouncy){
-                            if(selectedDays.contains(day))
+                            if(newTask.notificationDays.contains(day))
                             {
-                                selectedDays.remove(day)
+                                newTask.notificationDays.remove(day)
                             }
                             else
                             {
-                                selectedDays.insert(day)
+                                newTask.notificationDays.insert(day)
                             }
                         }
                     }, label: {
@@ -50,13 +48,13 @@ struct NewTaskView: View {
                             ZStack {
                                 Circle().fill(LinearGradient(colors: [.white], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(.black)
                                 
-                                if(selectedDays.contains(day)){
+                                if(newTask.notificationDays.contains(day)){
                                     Circle().stroke(lineWidth: 2.0).fill(LinearGradient(colors: [.red,.orange,.yellow,.green,.blue,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
                                     
                                 }
                                 Text(day.rawValue.prefix(3)).overlay{
                                     LinearGradient(
-                                        colors: selectedDays.contains(day) ? goal.type.colors : [.black],
+                                        colors: newTask.notificationDays.contains(day) ? goal.type.colors : [.black],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     ).mask(
@@ -69,20 +67,20 @@ struct NewTaskView: View {
                         else
                         {
                             ZStack {
-                                Circle().fill(LinearGradient(colors: selectedDays.contains(day) ? goal.type.colors: [], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(selectedDays.contains(day) ? .clear : .black)
+                                Circle().fill(LinearGradient(colors: newTask.notificationDays.contains(day) ? goal.type.colors: [], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(newTask.notificationDays.contains(day) ? .clear : .black)
                                 
-                                Text(day.rawValue.prefix(3)).foregroundStyle(selectedDays.contains(day) ? .white : .black)
-                            }.shadow(color: .gray,radius: selectedDays.contains(day) ? 2 : 0)
+                                Text(day.rawValue.prefix(3)).foregroundStyle(newTask.notificationDays.contains(day) ? .white : .black)
+                            }.shadow(color: .gray,radius: newTask.notificationDays.contains(day) ? 2 : 0)
                         }
                         
                         
                     })
                     
                 }
-            }.opacity(showRepetition ? 1.0 : 0.0)
+            }.opacity(newTask.repeatable ? 1.0 : 0.0)
             
             
-            LabeledStepper("How many weeks (TODO)",value: $newTask.repetitionPermanence).opacity(showRepetition ? 1.0 : 0.0).padding(.vertical)
+            LabeledStepper("How many weeks (TODO)",value: $newTask.repetitionPermanence).opacity(newTask.repeatable ? 1.0 : 0.0).padding(.vertical)
             
             Button(action: {
                 goal.tasks.append(newTask)
@@ -115,7 +113,7 @@ struct NewTaskView: View {
     NewTaskView(goal: Goal(type: .special, name: "", adescription: "", tasks: []))
 }
 
-enum WeekDaysEnum: String, CaseIterable
+enum WeekDaysEnum: String, CaseIterable, Codable
 {
     case monday = "Monday"
     case tuesday = "Tuesday"
