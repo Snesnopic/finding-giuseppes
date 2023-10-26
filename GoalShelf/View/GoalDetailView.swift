@@ -50,7 +50,7 @@ struct GoalDetailView: View {
                         }).foregroundStyle(.primary)
                         
                         
-                    }
+                    }.onDelete(perform: deleteTask)
                 }
             }.navigationBarTitle(goal.name, displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
