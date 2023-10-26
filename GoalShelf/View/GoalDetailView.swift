@@ -17,9 +17,27 @@ struct GoalDetailView: View {
             }
             
             List{
-                ForEach(goal.tasks)
+                if(goal.tasks.isEmpty)
                 {
-                    task in
+                    Section(footer:
+                                VStack {
+                        Spacer(minLength: UIScreen.main.bounds.size.height/3)
+                        HStack {
+                            Spacer()
+                            Text("Looks like you have no goals. Add some!").opacity(0.8)
+                            Spacer()
+                        }
+                    }
+                    )
+                    {
+                        //empty
+                    }
+                }
+                else
+                {
+                    ForEach(goal.tasks)
+                    {
+                        task in
                         Button(action: {
                             goal.toggle(task)
                         }, label: {
@@ -30,6 +48,7 @@ struct GoalDetailView: View {
                         }).foregroundStyle(.primary)
                         
                         
+                    }
                 }
             }.navigationBarTitle(goal.name, displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
@@ -39,13 +58,13 @@ struct GoalDetailView: View {
                 }).sheet(isPresented: $showCreateTask, content: {
                     NewTaskView(goal: goal).presentationDragIndicator(.visible)
                 }))
-                
+            
         }
         
     }
-
+    
 }
 
 #Preview {
-    GoalDetailView(goal: Goal(type: .health, name: "Lose weight", adescription: "Lose 5kg in 2 months in order to be ready for the fitness competition", tasks: [Task(name: "Following Dr. Ascanio's diet", description: "Follow the diet the doctor gave me, even when everybody around me is eating delicious unhealthy food!")]))
+    GoalDetailView(goal: Goal(type: .health, name: "Lose weight", adescription: "Lose 5kg in 2 months in order to be ready for the fitness competition", tasks: []))
 }
