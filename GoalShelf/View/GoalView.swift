@@ -89,42 +89,58 @@ struct GoalView: View {
                 ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
                 {
                     goal in
-                    
-                    NavigationLink(destination: GoalDetailView(goal: goal), label: {
-                        
-                        ZStack(alignment: .topLeading){
+                    HStack{
+                        if(isEditing){
+                            Spacer().frame(width: 20)
+                            Button(action : {
+                                deleteGoal(goal)
+                            }){Image(systemName: "minus.circle.fill").foregroundStyle(.red)}
                             
-                            RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                        }
+                        NavigationLink(destination: GoalDetailView(goal: goal), label: {
                             
-                            HStack{
-                                Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                Text(goal.name).font(.title2).foregroundStyle(.black)
+                            ZStack(alignment: .topLeading){
                                 
-                                Spacer()
-                                Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
-                            }.padding(.horizontal)
+                                RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                                
+                                HStack{
+                                    Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                    Text(goal.name).font(.title2).foregroundStyle(.black)
+                                    
+                                    Spacer()
+                                    Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                }.padding(.horizontal)
+                                
+                            }
                             
                             
+                            .padding()
                             
-                        }.padding()
-                        
-                    })
+                        }).disabled(isEditing)
+                    }
+                    
                 }
                 
-            }.navigationBarItems(
+            }
+             
+            .navigationTitle("My Goals").navigationBarItems(
                 leading: Button(action: {
-                    self.isEditing.toggle()
+                    withAnimation(.spring(duration: 0.5))
+                    {
+                        isEditing.toggle()
+                    }
+                    
                 }, label: {
-                    Text(isEditing ? "Done" : "Edit")
+                    Text(isEditing ? "Done" : "Edit").font(.title2)
                 }),
                 
                 trailing: Button(action: {
                     showModal.toggle()
                 }, label: {
                     Image(systemName: "plus.circle")
-                })
+                }).disabled(isEditing)
             )
-            .navigationTitle("My Goals")
+            
             .sheet(isPresented: $showModal){
                 NewGoalView().presentationDetents([.height(700)])
                     .presentationCornerRadius(30)

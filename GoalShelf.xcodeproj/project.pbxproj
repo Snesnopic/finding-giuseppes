@@ -63,8 +63,8 @@
 				9D1393DE2AE673C00026EAC6 /* GoalView.swift */,
 				6BF05D2F2AE6CCB000340E5D /* GoalDetailView.swift */,
 				9D1393DD2AE673C00026EAC6 /* NewGoalView.swift */,
-				9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */,
 				9D3C047D2AE902780023AB25 /* NewTaskView.swift */,
+				9D0E12692AE13A3200F6C9F5 /* GoalListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
