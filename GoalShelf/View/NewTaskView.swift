@@ -16,9 +16,15 @@ struct NewTaskView: View {
     var body: some View {
         
         VStack(spacing: 10.0){
-            Text("Task Name").font(.caption).opacity(0.8)
+            HStack {
+                Text("Task Name").font(.caption).opacity(0.8)
+                Spacer()
+            }
             TextField("Visit grandma", text: $newTask.name).textFieldStyle(.roundedBorder).onReceive(Just(newTask.name)) { _ in limitText(textLimit) }
-            Text("Task Description").font(.caption).opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+            HStack {
+                Text("Task Description").font(.caption).opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                Spacer()
+            }
             TextField("She's gonna make that delicious cake!", text: $newTask.description).textFieldStyle(.roundedBorder)
             Toggle(isOn: $newTask.repeatable, label: {
                 Text("Repeatable")
@@ -93,8 +99,8 @@ struct NewTaskView: View {
                     .foregroundStyle(.blue)
                 
             })
-            .disabled(newTask.name.isEmpty || newTask.description.isEmpty)
-            .opacity(newTask.name.isEmpty || newTask.description.isEmpty ? 0.5 : 1)
+            .disabled(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty))
+            .opacity(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty) ? 0.5 : 1)
             
         }.padding()
     }
