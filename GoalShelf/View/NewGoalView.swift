@@ -23,6 +23,7 @@ struct NewGoalView: View {
     @State private var goalType: GoalEnum = .education
     @State private var goalDescription: String = ""
     var body: some View {
+        Spacer().frame(height: 20)
         VStack(alignment: .leading, spacing: 9){
             Text("Goal Name").font(.caption).foregroundStyle(.gray)
             TextField("Finish the school project", text: $goalName).textFieldStyle(.roundedBorder).onReceive(Just(goalName)) { _ in limitText(textLimit) }
@@ -91,6 +92,7 @@ struct NewGoalView: View {
             
         }
         
+        Spacer()
         Button(action: {
             addGoal()
             dismiss()
@@ -105,6 +107,7 @@ struct NewGoalView: View {
         })
         .disabled(goalName.isEmpty || goalDescription.isEmpty)
         .opacity(goalName.isEmpty || goalDescription.isEmpty ? 0.5 : 1)
+        Spacer()
     }
     
     
