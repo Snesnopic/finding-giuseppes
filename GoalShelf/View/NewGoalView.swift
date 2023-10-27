@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import SwiftData
 
 struct NewGoalView: View {
     
@@ -92,7 +93,7 @@ struct NewGoalView: View {
         Spacer()
         VStack {
             Button(action: {
-                deleteGoal(newGoal)
+                addGoal()
                 dismiss()
                 
             }, label: {
@@ -100,14 +101,14 @@ struct NewGoalView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .textScale(.secondary)
-                
+                    
                 
             }).buttonStyle(.borderedProminent)
                 .clipShape(Capsule())
                 .disabled(newGoal.name.isEmpty || newGoal.adescription.isEmpty)
             .opacity(newGoal.name.isEmpty || newGoal.adescription.isEmpty ? 0.5 : 1)
             Button(role: .destructive,action: {
-                
+                deleteGoal(newGoal)
                 dismiss()
                 
             }, label: {

@@ -56,51 +56,56 @@ struct GoalView: View {
                     ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
                     {
                         goal in
-                      
-                            ZStack {
-                                NavigationLink(destination: GoalDetailView(goal: goal), label: {
-                                    ZStack(alignment: .topLeading){
-                                        RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
-                                        HStack{
-                                            Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                            Text(goal.name).font(.title2).foregroundStyle(.black)
-                                            
-                                            Spacer()
-                                            Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
-                                        }.padding(.horizontal)
+                        
+                        ZStack {
+                            NavigationLink(destination: GoalDetailView(goal: goal), label: {
+                                ZStack(alignment: .topLeading){
+                                    RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                                    HStack{
+                                        Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                        Text(goal.name).font(.title2).foregroundStyle(.black)
                                         
-                                    }.padding()
+                                        Spacer()
+                                        Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                    }.padding(.horizontal)
+                                    
+                                }.padding()
+                            })
+                            .disabled(isEditing)
+                            if(isEditing){
+                                Button(action:{
+                                    selectedGoal = goal
+                                    showModal.toggle()
+                                    
+                                } , label: {
+                                    Color.clear
                                 })
-                                .disabled(isEditing)
-                                if(isEditing){
-                                    Button(action:{
-                                        selectedGoal = goal
-                                        showModal.toggle()
-                                    } , label: {
-                                        Color.clear
-                                    })
-                                }
-                            }.sheet(isPresented: $showModal){
-                                if(isEditing){
-                                    NewGoalView(isEditing: isEditing, newGoal: goal).presentationDetents([.height(500)])
-                                        .presentationCornerRadius(30)
-                                        .presentationDragIndicator(.visible)
-                                }
-                                else{
-                                    NewGoalView(isEditing: isEditing).presentationDetents([.height(500)])
-                                        .presentationCornerRadius(30)
-                                        .presentationDragIndicator(.visible)
-                                }
-                                
                             }
+                        }.sheet(isPresented: $showModal, onDismiss:{
+                            if(allGoals.isEmpty){
+                                isEditing.toggle()
+                            }
+                        }){
+                            NewGoalView(isEditing: isEditing, newGoal: goal).presentationDetents([.height(500)])
+                                .presentationCornerRadius(30)
+                                .presentationDragIndicator(.visible)
+                        }
                         
                     }
                 }
                 
+            }.sheet(isPresented: $showModal){
+                
+                NewGoalView(isEditing: isEditing).presentationDetents([.height(500)])
+                    .presentationCornerRadius(30)
+                    .presentationDragIndicator(.visible)
+                
+                
+                
             }
             .navigationTitle("My Goals").navigationBarItems(
                 leading: Button(action: {
-                        isEditing.toggle()
+                    isEditing.toggle()
                     
                 }, label: {
                     Text(isEditing ? "Done" : "Edit").font(.title2)
