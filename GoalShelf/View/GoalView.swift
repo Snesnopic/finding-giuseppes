@@ -23,65 +23,22 @@ struct GoalView: View {
         NavigationStack{
             
             HStack(alignment: .top){
-                ZStack{
-                    RoundedRectangle(cornerRadius: 25.0).fill(.gray).fill(LinearGradient(colors: goalTypeFilter == .education ? GoalEnum.education.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
-                    
-                    Image(systemName: GoalEnum.education.symbol)
-                }.onTapGesture {
-                    withAnimation(.linear(duration: 0.2)){
-                        if(goalTypeFilter == .education){
-                            goalTypeFilter = nil
-                        }else{
-                            goalTypeFilter = .education
+                ForEach(GoalEnum.allCases, id: \.rawValue){
+                    type in
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 25.0).fill(.gray).fill(LinearGradient(colors: goalTypeFilter == type ? type.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                        
+                        Image(systemName: type.symbol)
+                    }.onTapGesture {
+                        withAnimation(.linear(duration: 0.2)){
+                            if(goalTypeFilter == type){
+                                goalTypeFilter = nil
+                            }else{
+                                goalTypeFilter = type
+                            }
                         }
                     }
                 }
-                
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalTypeFilter == .work ? GoalEnum.work.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
-                    
-                    Image(systemName: GoalEnum.work.symbol)
-                }.onTapGesture {
-                    withAnimation(.linear(duration: 0.2)){
-                        if(goalTypeFilter == .work){
-                            goalTypeFilter = nil
-                        }else{
-                            goalTypeFilter = .work
-                        }
-                    }
-                }
-                
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalTypeFilter == .health ? GoalEnum.health.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
-                    
-                    Image(systemName: GoalEnum.health.symbol)
-                }.onTapGesture {
-                    withAnimation(.linear(duration: 0.2)){
-                        if(goalTypeFilter == .health){
-                            goalTypeFilter = nil
-                        }else{
-                            goalTypeFilter = .health
-                        }
-                    }
-                }
-                
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalTypeFilter == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
-                    Image(systemName: GoalEnum.special.symbol)
-                }.onTapGesture {
-                    withAnimation(.linear(duration: 0.2)){
-                        if(goalTypeFilter == .special){
-                            goalTypeFilter = nil
-                        }else{
-                            goalTypeFilter = .special
-                        }
-                    }
-                }
-                
-                
             }.padding()
                 .frame(height: 80)
                 .foregroundStyle(.white)
