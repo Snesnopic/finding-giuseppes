@@ -42,7 +42,7 @@ struct NewGoalView: View {
                     Image(systemName: GoalEnum.education.symbol)
                     Text(GoalEnum.education.rawValue)
                 }.foregroundStyle(.white)
-            }.shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).onTapGesture {
+            }.shadow(radius: 5).onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
                     goalType = .education
                     
@@ -55,7 +55,7 @@ struct NewGoalView: View {
                     Image(systemName: GoalEnum.work.symbol)
                     Text(GoalEnum.work.rawValue)
                 }.foregroundStyle(.white)
-            }.shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).onTapGesture {
+            }.shadow(radius: 5).onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
                     goalType = .work
                 }
@@ -69,14 +69,14 @@ struct NewGoalView: View {
                     Image(systemName: GoalEnum.health.symbol)
                     Text(GoalEnum.health.rawValue)
                 }.foregroundStyle(.white)
-            }.shadow(radius: 10).onTapGesture {
+            }.shadow(radius: 5).onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
                     goalType = .health
                 }
             }
             Spacer().frame(width: 15)
             ZStack{
-                Color.white.clipShape(RoundedRectangle(cornerRadius: 25.0)).shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).frame(width: 180, height: 100)
+                Color.white.clipShape(RoundedRectangle(cornerRadius: 25.0)).shadow(radius: 5).frame(width: 180, height: 100)
                 RoundedRectangle(cornerRadius: 25.0).stroke(lineWidth: 2.0).fill(LinearGradient(colors: goalType == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack
                 {
