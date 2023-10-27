@@ -167,7 +167,7 @@ struct GoalView: View {
                     
                 }, label: {
                     Text(isEditing ? "Done" : "Edit").font(.title2)
-                }),
+                }).disabled(allGoals.isEmpty),
                 
                 trailing: Button(action: {
                     showModal.toggle()
