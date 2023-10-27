@@ -14,6 +14,7 @@ struct GoalView: View {
     @State private var isEditing = false
     @State private var confirmationShown = false
     @State private var goalTypeFilter: GoalEnum? = nil
+    @State private var selectedGoal:Goal = Goal(type: .education, name: "fittizio", adescription: "asda", tasks: [])
     @Query private var allGoals: [Goal]
     
     
@@ -55,49 +56,43 @@ struct GoalView: View {
                     ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
                     {
                         goal in
-                        HStack{
-                            if(isEditing){
-                                Spacer().frame(width: 20)
-                                Button(action : {
-                                    confirmationShown = true
-                                }){Image(systemName: "minus.circle.fill").foregroundStyle(.red)}
-                                    .confirmationDialog(
-                                        "Do you want to delete this element?",
-                                        isPresented: $confirmationShown,
-                                        titleVisibility: .visible
+                      
+                            ZStack {
+                                NavigationLink(destination: GoalDetailView(goal: goal), label: {
+                                    ZStack(alignment: .topLeading){
+                                        RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                                        HStack{
+                                            Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                            Text(goal.name).font(.title2).foregroundStyle(.black)
+                                            
+                                            Spacer()
+                                            Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                        }.padding(.horizontal)
                                         
-                                    ){
-                                        Button("Delete", role: .destructive){
-                                            deleteGoal(goal)
-                                            if(allGoals.isEmpty){
-                                                isEditing.toggle()
-                                            }
-                                        }
-                                    }
-                                
-                            }
-                            NavigationLink(destination: GoalDetailView(goal: goal), label: {
-                                
-                                ZStack(alignment: .topLeading){
-                                    
-                                    RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
-                                    
-                                    HStack{
-                                        Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                        Text(goal.name).font(.title2).foregroundStyle(.black)
-                                        
-                                        Spacer()
-                                        Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
-                                    }.padding(.horizontal)
-                                    
+                                    }.padding()
+                                })
+                                .disabled(isEditing)
+                                if(isEditing){
+                                    Button(action:{
+                                        selectedGoal = goal
+                                        showModal.toggle()
+                                    } , label: {
+                                        Color.clear
+                                    })
+                                }
+                            }.sheet(isPresented: $showModal){
+                                if(isEditing){
+                                    NewGoalView(isEditing: isEditing, newGoal: goal).presentationDetents([.height(500)])
+                                        .presentationCornerRadius(30)
+                                        .presentationDragIndicator(.visible)
+                                }
+                                else{
+                                    NewGoalView(isEditing: isEditing).presentationDetents([.height(500)])
+                                        .presentationCornerRadius(30)
+                                        .presentationDragIndicator(.visible)
                                 }
                                 
-                                
-                                .padding()
-                                
-                            })
-                            .disabled(isEditing)
-                        }
+                            }
                         
                     }
                 }
@@ -105,10 +100,7 @@ struct GoalView: View {
             }
             .navigationTitle("My Goals").navigationBarItems(
                 leading: Button(action: {
-                    withAnimation(.spring(duration: 0.5))
-                    {
                         isEditing.toggle()
-                    }
                     
                 }, label: {
                     Text(isEditing ? "Done" : "Edit").font(.title2)
@@ -120,18 +112,10 @@ struct GoalView: View {
                     Image(systemName: "plus.circle")
                 }).disabled(isEditing)
             )
-            
-            .sheet(isPresented: $showModal){
-                NewGoalView().presentationDetents([.height(500)])
-                    .presentationCornerRadius(30)
-                    .presentationDragIndicator(.visible)
-            }
         }
     }
     
-    func deleteGoal(_ goal: Goal){
-        context.delete(goal)
-    }
+    
 }
 
 #Preview {
