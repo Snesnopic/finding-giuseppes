@@ -26,7 +26,7 @@ struct GoalDetailView: View {
                         Spacer(minLength: UIScreen.main.bounds.size.height/3)
                         HStack {
                             Spacer()
-                            Text("Looks like you have no goals. Add some!").opacity(0.8)
+                            Text("Looks like you have no tasks. Add some!").opacity(0.8)
                             Spacer()
                         }
                     }
