@@ -10,8 +10,9 @@ import SwiftData
 
 struct GoalView: View {
     @Environment (\.modelContext) private var context
-    @State var showModal = false
-    @State var isEditing = false
+    @State private var showModal = false
+    @State private var isEditing = false
+    @State private var confirmationShown = false
     @State private var goalTypeFilter: GoalEnum? = nil
     @Query private var allGoals: [Goal]
     
@@ -93,8 +94,18 @@ struct GoalView: View {
                         if(isEditing){
                             Spacer().frame(width: 20)
                             Button(action : {
-                                deleteGoal(goal)
+                                confirmationShown = true
                             }){Image(systemName: "minus.circle.fill").foregroundStyle(.red)}
+                                .confirmationDialog(
+                                    "Are you sure?",
+                                    isPresented: $confirmationShown,
+                                    titleVisibility: .visible
+                                    
+                                ){
+                                    Button("Yes", role: .destructive){
+                                        deleteGoal(goal)
+                                    }
+                                }
                             
                         }
                         NavigationLink(destination: GoalDetailView(goal: goal), label: {
@@ -116,13 +127,13 @@ struct GoalView: View {
                             
                             .padding()
                             
-                        }).disabled(isEditing)
+                        })
+                        .disabled(isEditing)
                     }
                     
                 }
                 
             }
-             
             .navigationTitle("My Goals").navigationBarItems(
                 leading: Button(action: {
                     withAnimation(.spring(duration: 0.5))
