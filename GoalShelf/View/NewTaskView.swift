@@ -87,7 +87,7 @@ struct NewTaskView: View {
             
             
             LabeledStepper("How many weeks (TODO)",value: $newTask.repetitionPermanence).opacity(newTask.repeatable ? 1.0 : 0.0).padding(.vertical)
-            
+            Spacer()
             Button(action: {
                 goal.tasks.append(newTask)
                 dismiss()
@@ -96,13 +96,14 @@ struct NewTaskView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .textScale(.secondary)
-                    .foregroundStyle(.blue)
                 
-            })
+            }).buttonStyle(.borderedProminent)
+                .clipShape(Capsule())
             .disabled(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty))
             .opacity(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty) ? 0.5 : 1)
             
         }.padding()
+        Spacer()
     }
     
     

@@ -49,7 +49,9 @@ struct GoalDetailView: View {
                     }, label: {
                         Image(systemName: "plus.circle")
                     }).sheet(isPresented: $showCreateTask, content: {
-                        NewTaskView(goal: goal).presentationDragIndicator(.visible)
+                        NewTaskView(goal: goal).presentationDetents([.height(500)])
+                            .presentationCornerRadius(30)
+                            .presentationDragIndicator(.visible)
                     }))
                 VStack {
                     Spacer(minLength: UIScreen.main.bounds.size.height/4)
