@@ -46,8 +46,9 @@ struct GoalView: View {
             ScrollView{
                 if(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type}).isEmpty){
                     Spacer(minLength: UIScreen.main.bounds.size.height/4)
+                    Image(systemName: "zzz").font(.largeTitle).opacity(0.8)
                     Text("You have no goals here!").opacity(0.8)
-                    Image(systemName: "powersleep").font(.largeTitle).opacity(0.8)
+                    
                 }
                 else
                 {

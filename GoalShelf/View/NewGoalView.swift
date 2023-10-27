@@ -96,17 +96,18 @@ struct NewGoalView: View {
         Button(action: {
             addGoal()
             dismiss()
-                
+            
         }, label: {
             Text("Create")
                 .font(.title3)
                 .fontWeight(.semibold)
                 .textScale(.secondary)
-                .foregroundStyle(.blue)
             
-        })
-        .disabled(goalName.isEmpty || goalDescription.isEmpty)
-        .opacity(goalName.isEmpty || goalDescription.isEmpty ? 0.5 : 1)
+            
+        }).buttonStyle(.borderedProminent)
+            .clipShape(Capsule())
+            .disabled(goalName.isEmpty || goalDescription.isEmpty)
+            .opacity(goalName.isEmpty || goalDescription.isEmpty ? 0.5 : 1)
         Spacer()
     }
     
@@ -114,10 +115,10 @@ struct NewGoalView: View {
     
     
     func limitText(_ upper: Int) {
-            if goalName.count > upper {
-                goalName = String(goalName.prefix(upper))
-            }
+        if goalName.count > upper {
+            goalName = String(goalName.prefix(upper))
         }
+    }
     
     func addGoal(){
         let newGoal = Goal(type: goalType, name: goalName, adescription: goalDescription, tasks: [])
