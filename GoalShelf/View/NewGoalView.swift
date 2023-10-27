@@ -15,20 +15,17 @@ struct NewGoalView: View {
     @Environment (\.dismiss) private var dismiss
     
     
-    
+    var isEditing:Bool = false
     let textLimit = 35
     let disabled: [Color] = [.white, .gray]
-    
-    @State private var goalName: String = ""
-    @State private var goalType: GoalEnum = .education
-    @State private var goalDescription: String = ""
+    @State public var newGoal: Goal = Goal(type: .education, name: "", adescription: "", tasks: [])
     var body: some View {
         Spacer().frame(height: 20)
         VStack(alignment: .leading, spacing: 9){
             Text("Goal Name").font(.caption).opacity(0.8)
-            TextField("Finish the school project", text: $goalName).textFieldStyle(.roundedBorder).onReceive(Just(goalName)) { _ in limitText(textLimit) }
+            TextField("Finish the school project", text: $newGoal.name).textFieldStyle(.roundedBorder).onReceive(Just(newGoal.name)) { _ in limitText(textLimit) }
             Text("Goal Description").font(.caption).opacity(0.8)
-            TextField("We're so behind...", text: $goalDescription).textFieldStyle(.roundedBorder)
+            TextField("We're so behind...", text: $newGoal.adescription).textFieldStyle(.roundedBorder)
             
         }.padding()
         
@@ -37,92 +34,109 @@ struct NewGoalView: View {
         HStack{
             
             ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .education ? GoalEnum.education.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: newGoal.type == .education ? GoalEnum.education.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
                     Image(systemName: GoalEnum.education.symbol)
                     Text(GoalEnum.education.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: 5).onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
-                    goalType = .education
+                    newGoal.type = .education
                     
                 }
             }
             Spacer().frame(width: 15)
             ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .work ? GoalEnum.work.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: newGoal.type == .work ? GoalEnum.work.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
                     Image(systemName: GoalEnum.work.symbol)
                     Text(GoalEnum.work.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: 5).onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
-                    goalType = .work
+                    newGoal.type = .work
                 }
             }
         }
         
         HStack{
             ZStack{
-                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: goalType == .health ? GoalEnum.health.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).fill(LinearGradient(colors: newGoal.type == .health ? GoalEnum.health.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack{
                     Image(systemName: GoalEnum.health.symbol)
                     Text(GoalEnum.health.rawValue)
                 }.foregroundStyle(.white)
             }.shadow(radius: 5).onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
-                    goalType = .health
+                    newGoal.type = .health
                 }
             }
             Spacer().frame(width: 15)
             ZStack{
                 Color.white.clipShape(RoundedRectangle(cornerRadius: 25.0)).shadow(radius: 5).frame(width: 180, height: 100)
-                RoundedRectangle(cornerRadius: 25.0).stroke(lineWidth: 2.0).fill(LinearGradient(colors: goalType == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
+                RoundedRectangle(cornerRadius: 25.0).stroke(lineWidth: 2.0).fill(LinearGradient(colors: newGoal.type == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 180, height: 100)
                 VStack
                 {
                     Image(systemName: GoalEnum.special.symbol)
                     Text(GoalEnum.special.rawValue)
-                }.foregroundStyle(LinearGradient(colors: goalType == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
+                }.foregroundStyle(LinearGradient(colors: newGoal.type == .special ? GoalEnum.special.colors : disabled, startPoint: .topLeading, endPoint: .bottomTrailing))
                 
             }.onTapGesture {
                 withAnimation(.linear(duration: 0.5)){
-                    goalType = .special
+                    newGoal.type = .special
                 }
             }
             
         }
         
         Spacer()
-        Button(action: {
-            addGoal()
-            dismiss()
-            
-        }, label: {
-            Text("Create")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .textScale(.secondary)
-            
-            
-        }).buttonStyle(.borderedProminent)
-            .clipShape(Capsule())
-            .disabled(goalName.isEmpty || goalDescription.isEmpty)
-            .opacity(goalName.isEmpty || goalDescription.isEmpty ? 0.5 : 1)
+        VStack {
+            Button(action: {
+                deleteGoal(newGoal)
+                dismiss()
+                
+            }, label: {
+                Text(isEditing ? "Save" : "Create")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .textScale(.secondary)
+                
+                
+            }).buttonStyle(.borderedProminent)
+                .clipShape(Capsule())
+                .disabled(newGoal.name.isEmpty || newGoal.adescription.isEmpty)
+            .opacity(newGoal.name.isEmpty || newGoal.adescription.isEmpty ? 0.5 : 1)
+            Button(role: .destructive,action: {
+                
+                dismiss()
+                
+            }, label: {
+                Text("Delete")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .textScale(.secondary)
+                
+                
+            }).buttonStyle(.borderedProminent)
+                .clipShape(Capsule())
+                .disabled(!isEditing)
+            .opacity(!isEditing ? 0 : 1)
+        }
         Spacer()
     }
     
     
-    
+    func deleteGoal(_ goal: Goal){
+        context.delete(goal)
+    }
     
     func limitText(_ upper: Int) {
-        if goalName.count > upper {
-            goalName = String(goalName.prefix(upper))
+        if newGoal.name.count > upper {
+            newGoal.name = String(newGoal.name.prefix(upper))
         }
     }
     
     func addGoal(){
-        let newGoal = Goal(type: goalType, name: goalName, adescription: goalDescription, tasks: [])
-        
         context.insert(newGoal)
     }
 }
@@ -130,5 +144,5 @@ struct NewGoalView: View {
 
 
 #Preview {
-    NewGoalView()
+    NewGoalView(isEditing: true, newGoal: Goal(type: .education, name: "", adescription: "", tasks: []))
 }
