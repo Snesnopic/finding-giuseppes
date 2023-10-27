@@ -77,13 +77,16 @@ struct GoalView: View {
                                     confirmationShown = true
                                 }){Image(systemName: "minus.circle.fill").foregroundStyle(.red)}
                                     .confirmationDialog(
-                                        "Are you sure?",
+                                        "Do you want to delete this element?",
                                         isPresented: $confirmationShown,
                                         titleVisibility: .visible
                                         
                                     ){
-                                        Button("Yes", role: .destructive){
+                                        Button("Delete", role: .destructive){
                                             deleteGoal(goal)
+                                            if(allGoals.isEmpty){
+                                                isEditing.toggle()
+                                            }
                                         }
                                     }
                                 
