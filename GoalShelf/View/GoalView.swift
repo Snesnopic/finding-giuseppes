@@ -87,50 +87,74 @@ struct GoalView: View {
                 .foregroundStyle(.white)
             
             ScrollView{
-                ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
+                if(allGoals.isEmpty)
                 {
-                    goal in
-                    HStack{
-                        if(isEditing){
-                            Spacer().frame(width: 20)
-                            Button(action : {
-                                confirmationShown = true
-                            }){Image(systemName: "minus.circle.fill").foregroundStyle(.red)}
-                                .confirmationDialog(
-                                    "Are you sure?",
-                                    isPresented: $confirmationShown,
-                                    titleVisibility: .visible
-                                    
-                                ){
-                                    Button("Yes", role: .destructive){
-                                        deleteGoal(goal)
+                    Text("You have no goals!")
+                    
+                    ZStack(alignment: .topLeading){
+                        
+                        RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                        
+                        HStack{
+                            Image(systemName: "plus").font(.title).foregroundStyle(LinearGradient(colors: [.red], startPoint:.topLeading, endPoint:.bottomTrailing))
+                            Text("Add some goals!").font(.title2).foregroundStyle(.black)
+                            
+                            Spacer()
+                            Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                        }.padding(.horizontal)
+                        
+                    }.padding()
+                }
+                
+                
+                
+                else
+                {
+                    ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
+                    {
+                        goal in
+                        HStack{
+                            if(isEditing){
+                                Spacer().frame(width: 20)
+                                Button(action : {
+                                    confirmationShown = true
+                                }){Image(systemName: "minus.circle.fill").foregroundStyle(.red)}
+                                    .confirmationDialog(
+                                        "Are you sure?",
+                                        isPresented: $confirmationShown,
+                                        titleVisibility: .visible
+                                        
+                                    ){
+                                        Button("Yes", role: .destructive){
+                                            deleteGoal(goal)
+                                        }
                                     }
-                                }
-                            
-                        }
-                        NavigationLink(destination: GoalDetailView(goal: goal), label: {
-                            
-                            ZStack(alignment: .topLeading){
-                                
-                                RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
-                                
-                                HStack{
-                                    Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
-                                    Text(goal.name).font(.title2).foregroundStyle(.black)
-                                    
-                                    Spacer()
-                                    Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
-                                }.padding(.horizontal)
                                 
                             }
-                            
-                            
-                            .padding()
-                            
-                        })
-                        .disabled(isEditing)
+                            NavigationLink(destination: GoalDetailView(goal: goal), label: {
+                                
+                                ZStack(alignment: .topLeading){
+                                    
+                                    RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
+                                    
+                                    HStack{
+                                        Image(systemName: goal.type.symbol).font(.title).foregroundStyle(LinearGradient(colors: goal.type.colors, startPoint:.topLeading, endPoint:.bottomTrailing))
+                                        Text(goal.name).font(.title2).foregroundStyle(.black)
+                                        
+                                        Spacer()
+                                        Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                    }.padding(.horizontal)
+                                    
+                                }
+                                
+                                
+                                .padding()
+                                
+                            })
+                            .disabled(isEditing)
+                        }
+                        
                     }
-                    
                 }
                 
             }
