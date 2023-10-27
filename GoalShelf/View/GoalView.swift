@@ -44,9 +44,9 @@ struct GoalView: View {
                 .foregroundStyle(.white)
             
             ScrollView{
-                if(allGoals.isEmpty)
+                if(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type}).isEmpty)
                 {
-                    Text("You have no goals!")
+                    Text("You have no goals here!")
                     
                     ZStack(alignment: .topLeading){
                         
