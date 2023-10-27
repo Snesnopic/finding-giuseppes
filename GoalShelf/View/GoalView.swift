@@ -44,27 +44,11 @@ struct GoalView: View {
                 .foregroundStyle(.white)
             
             ScrollView{
-                if(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type}).isEmpty)
-                {
-                    Text("You have no goals here!")
-                    
-                    ZStack(alignment: .topLeading){
-                        
-                        RoundedRectangle(cornerRadius: 25.0).fill(.white).padding(.vertical,-10).shadow(radius: 5)
-                        
-                        HStack{
-                            Image(systemName: "plus").font(.title).foregroundStyle(LinearGradient(colors: [.red], startPoint:.topLeading, endPoint:.bottomTrailing))
-                            Text("Add some goals!").font(.title2).foregroundStyle(.black)
-                            
-                            Spacer()
-                            Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
-                        }.padding(.horizontal)
-                        
-                    }.padding()
+                if(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type}).isEmpty){
+                    Spacer(minLength: UIScreen.main.bounds.size.height/4)
+                    Text("You have no goals here!").opacity(0.8)
+                    Image(systemName: "powersleep").font(.largeTitle).opacity(0.8)
                 }
-                
-                
-                
                 else
                 {
                     ForEach(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type})) //filtered list
