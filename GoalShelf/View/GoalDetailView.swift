@@ -17,52 +17,56 @@ struct GoalDetailView: View {
             VStack{
                 Text(goal.adescription)
             }
-            
-            List{
-                if(goal.tasks.isEmpty)
-                {
-                    Section(footer:
-                                VStack {
-                        Spacer(minLength: UIScreen.main.bounds.size.height/3)
-                        HStack {
-                            Spacer()
-                            Text("Looks like you have no tasks. Add some!").opacity(0.8)
-                            Spacer()
-                        }
-                    }
-                    )
-                    {
-                        //empty
-                    }
-                }
-                else
-                {
-                    ForEach(goal.tasks)
-                    {
-                        task in
-                        Button(action: {
-                            goal.toggle(task)
-                        }, label: {
+            ZStack {
+                List{
+                    if(goal.tasks.isEmpty){
+                        Section(footer:
+                                    VStack {
+                            Spacer(minLength: UIScreen.main.bounds.size.height/3)
                             HStack {
-                                Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
-                                Text(task.name)
+                                Spacer()
+                                Text("Looks like you have no tasks. Add some!").opacity(0.8)
+                                Spacer()
                             }
-                        }).foregroundStyle(.primary)
-                        
-                        
-                    }.onDelete(perform: deleteTask)
-                }
-            }.navigationBarTitle(goal.name, displayMode: .inline)
-                .navigationBarItems(trailing: Button(action: {
-                    showCreateTask.toggle()
-                }, label: {
-                    Image(systemName: "plus.circle")
-                }).sheet(isPresented: $showCreateTask, content: {
-                    NewTaskView(goal: goal).presentationDragIndicator(.visible)
-                }))
-            
+                        }){}
+                    }
+                    else{
+                        ForEach(goal.tasks){
+                            task in
+                            Button(action: {
+                                goal.toggle(task)
+                            }, label: {
+                                HStack {
+                                    Image(systemName:  task.isCompleted ? "circle.fill":"circle").foregroundStyle(.blue)
+                                    Text(task.name)
+                                }
+                            }).foregroundStyle(.primary)
+                        }.onDelete(perform: deleteTask)
+                    }
+                }.navigationBarTitle(goal.name, displayMode: .inline)
+                    .navigationBarItems(trailing: Button(action: {
+                        showCreateTask.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                    }).sheet(isPresented: $showCreateTask, content: {
+                        NewTaskView(goal: goal).presentationDragIndicator(.visible)
+                    }))
+                VStack {
+                    Spacer(minLength: UIScreen.main.bounds.size.height/4)
+                    HStack {
+                        Spacer()
+                        Button(action: {}, label: {
+                            Text("Complete goal")
+                        }).clipShape(Capsule()).padding().buttonStyle(.borderedProminent).disabled(goal.tasks.isEmpty || !goal.tasks.allSatisfy({ task in
+                            task.isCompleted
+                        }))
+                        Spacer()
+                    }
+                }.opacity(goal.tasks.isEmpty || !goal.tasks.allSatisfy({ task in
+                    task.isCompleted
+                }) ? 0 : 1)
+            }
         }
-        
     }
     
     func deleteTask(at offsets: IndexSet) {
