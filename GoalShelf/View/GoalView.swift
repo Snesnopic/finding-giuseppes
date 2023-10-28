@@ -10,11 +10,12 @@ import SwiftData
 
 struct GoalView: View {
     @Environment (\.modelContext) private var context
-    @State private var showModal = false
+    
     @State private var isEditing = false
     @State private var confirmationShown = false
     @State private var goalTypeFilter: GoalEnum? = nil
-    @State private var selectedGoal:Goal = Goal(type: .education, name: "fittizio", adescription: "asda", tasks: [])
+    @State var selectedGoal: Goal?
+    @State private var showModal = false
     @Query private var allGoals: [Goal]
     
     
@@ -66,58 +67,96 @@ struct GoalView: View {
                                         Text(goal.name).font(.title2).foregroundStyle(.black)
                                         
                                         Spacer()
-                                        Image(systemName: "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                        Image(systemName: isEditing ? "pencil.and.scribble" : "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                        
                                     }.padding(.horizontal)
                                     
                                 }.padding()
                             })
                             .disabled(isEditing)
+                            
                             if(isEditing){
                                 Button(action:{
+                                    
                                     selectedGoal = goal
-                                    showModal.toggle()
+                                    
                                     
                                 } , label: {
                                     Color.clear
                                 })
                             }
-                        }.sheet(isPresented: $showModal, onDismiss:{
-                            if(allGoals.isEmpty){
-                                isEditing.toggle()
-                            }
-                        }){
-                            NewGoalView(isEditing: isEditing, newGoal: goal).presentationDetents([.height(500)])
-                                .presentationCornerRadius(30)
-                                .presentationDragIndicator(.visible)
                         }
                         
-                    }
+                    }.sheet(item: $selectedGoal,
+                            onDismiss: { if(allGoals.isEmpty){ isEditing = false} },
+                            content: { goal in
+                            if(isEditing){
+                            NewGoalView(newGoal: goal, isEditing: isEditing)
+                                    .presentationDetents([.height(500)])
+                                    .presentationCornerRadius(30)
+                                    .presentationDragIndicator(.visible)
+                                    .interactiveDismissDisabled()
+                        }
+                        
+                    })
                 }
                 
-            }.sheet(isPresented: $showModal){
-                
-                NewGoalView(isEditing: isEditing).presentationDetents([.height(500)])
-                    .presentationCornerRadius(30)
-                    .presentationDragIndicator(.visible)
-                
-                
-                
             }
+            
+            //            .sheet( isPresented: $showModal, onDismiss:{
+            //                if(allGoals.isEmpty){
+            //                    isEditing = false
+            //                }
+            //            })
+            //            {
+            //
+            //                if(isEditing){
+            //
+            //                  NewGoalView(newGoal: selectedGoal!, isEditing: isEditing)
+            //                            .presentationDetents([.height(500)])
+            //                            .presentationCornerRadius(30)
+            //                            .presentationDragIndicator(.visible)
+            //
+            //
+            //
+            //                    }
+            //
+            //
+            //                else{
+            //
+            //                    NewGoalView(isEditing: isEditing)
+            //                        .presentationDetents([.height(500)])
+            //                        .presentationCornerRadius(30)
+            //                        .presentationDragIndicator(.visible)
+            //                }
+            //            }
             .navigationTitle("My Goals").navigationBarItems(
-                leading: Button(action: {
-                    isEditing.toggle()
+                leading:
                     
+                    //EditButton().disabled(allGoals.isEmpty)
+                
+                Button(action: {
+                    isEditing.toggle()
                 }, label: {
-                    Text(isEditing ? "Done" : "Edit").font(.title2)
-                }).disabled(allGoals.isEmpty),
+                    Text(isEditing ? "Done" : "Edit")
+                }).disabled(allGoals.isEmpty)
+                ,
                 
                 trailing: Button(action: {
                     showModal.toggle()
                 }, label: {
                     Image(systemName: "plus.circle")
-                }).disabled(isEditing)
+                }).sheet(isPresented: $showModal ){
+                    NewGoalView(isEditing: isEditing)
+                        .presentationDetents([.height(500)])
+                        .presentationCornerRadius(30)
+                        .presentationDragIndicator(.visible)
+                }
+                .disabled(isEditing)
             )
+            
         }
+        
     }
     
     

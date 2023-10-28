@@ -24,8 +24,6 @@ struct GoalShelfApp: App {
         
     }
     
-    
-    
      
     var body: some Scene {
         WindowGroup {

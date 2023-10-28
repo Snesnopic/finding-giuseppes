@@ -7,19 +7,19 @@
 
 import SwiftUI
 import Combine
-import SwiftData
 
 struct NewGoalView: View {
     
     @Environment (\.presentationMode) var presentation
     @Environment (\.modelContext) private var context
     @Environment (\.dismiss) private var dismiss
-    
+
+    @State public var newGoal: Goal = Goal(type: .education, name: "", adescription: "", tasks: [])
     
     var isEditing:Bool = false
     let textLimit = 35
     let disabled: [Color] = [.white, .gray]
-    @State public var newGoal: Goal = Goal(type: .education, name: "", adescription: "", tasks: [])
+    
     var body: some View {
         Spacer().frame(height: 20)
         VStack(alignment: .leading, spacing: 9){
@@ -145,5 +145,5 @@ struct NewGoalView: View {
 
 
 #Preview {
-    NewGoalView(isEditing: true, newGoal: Goal(type: .education, name: "", adescription: "", tasks: []))
+    NewGoalView(newGoal: Goal(type: .education, name: "", adescription: "", tasks: []), isEditing: true)
 }
