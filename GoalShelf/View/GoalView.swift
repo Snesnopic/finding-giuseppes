@@ -77,10 +77,7 @@ struct GoalView: View {
                             
                             if(isEditing){
                                 Button(action:{
-                                    
                                     selectedGoal = goal
-                                    
-                                    
                                 } , label: {
                                     Color.clear
                                 })
@@ -102,34 +99,6 @@ struct GoalView: View {
                 }
                 
             }
-            
-            //            .sheet( isPresented: $showModal, onDismiss:{
-            //                if(allGoals.isEmpty){
-            //                    isEditing = false
-            //                }
-            //            })
-            //            {
-            //
-            //                if(isEditing){
-            //
-            //                  NewGoalView(newGoal: selectedGoal!, isEditing: isEditing)
-            //                            .presentationDetents([.height(500)])
-            //                            .presentationCornerRadius(30)
-            //                            .presentationDragIndicator(.visible)
-            //
-            //
-            //
-            //                    }
-            //
-            //
-            //                else{
-            //
-            //                    NewGoalView(isEditing: isEditing)
-            //                        .presentationDetents([.height(500)])
-            //                        .presentationCornerRadius(30)
-            //                        .presentationDragIndicator(.visible)
-            //                }
-            //            }
             .navigationTitle("My Goals").navigationBarItems(
                 leading:
                     
@@ -158,8 +127,7 @@ struct GoalView: View {
         }
         
     }
-    
-    
+       
 }
 
 #Preview {

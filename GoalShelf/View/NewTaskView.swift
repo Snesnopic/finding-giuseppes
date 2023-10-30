@@ -9,9 +9,10 @@ import SwiftUI
 import Combine
 
 struct NewTaskView: View {
-    var goal:Goal
-    @State private var newTask:Task = Task()
     @Environment(\.dismiss) var dismiss
+    @State private var newTask:Task = Task()
+    
+    var goal:Goal
     let textLimit = 35
     var body: some View {
         
@@ -30,7 +31,7 @@ struct NewTaskView: View {
                 Text("Repeatable")
             })
             
-            LabeledStepper("Times a week", value: $newTask.repetitionCount).opacity(newTask.repeatable ? 1.0 : 0.0).padding(.vertical)
+            
             HStack
             {
                 ForEach(WeekDaysEnum.allCases,id: \.rawValue)
@@ -52,10 +53,10 @@ struct NewTaskView: View {
                         if(goal.type == .special)
                         {
                             ZStack {
-                                Circle().fill(LinearGradient(colors: [.white], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(.black)
+                                Circle().fill(LinearGradient(colors: [.white], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(.black).frame(width: 45, height: 45)
                                 
                                 if(newTask.notificationDays.contains(day)){
-                                    Circle().stroke(lineWidth: 2.0).fill(LinearGradient(colors: [.red,.orange,.yellow,.green,.blue,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    Circle().stroke(lineWidth: 2.0).fill(LinearGradient(colors: [.red,.orange,.yellow,.green,.blue,.purple], startPoint: .topLeading, endPoint: .bottomTrailing)).frame(width: 45, height: 45)
                                     
                                 }
                                 Text(day.rawValue.prefix(3)).overlay{
@@ -73,7 +74,7 @@ struct NewTaskView: View {
                         else
                         {
                             ZStack {
-                                Circle().fill(LinearGradient(colors: newTask.notificationDays.contains(day) ? goal.type.colors: [], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(newTask.notificationDays.contains(day) ? .clear : .black)
+                                Circle().fill(LinearGradient(colors: newTask.notificationDays.contains(day) ? goal.type.colors: [], startPoint: .topLeading, endPoint: .bottomTrailing)).stroke(newTask.notificationDays.contains(day) ? .clear : .black).frame(width: 45, height: 45)
                                 
                                 Text(day.rawValue.prefix(3)).foregroundStyle(newTask.notificationDays.contains(day) ? .white : .black)
                             }.shadow(color: .gray,radius: newTask.notificationDays.contains(day) ? 2 : 0)
