@@ -89,7 +89,7 @@ struct GoalView: View {
                             content: { goal in
                             if(isEditing){
                             NewGoalView(newGoal: goal, isEditing: isEditing)
-                                    .presentationDetents([.height(500)])
+                                    .presentationDetents([.height(550)])
                                     .presentationCornerRadius(30)
                                     .presentationDragIndicator(.visible)
                                     .interactiveDismissDisabled()
@@ -117,7 +117,7 @@ struct GoalView: View {
                     Image(systemName: "plus.circle")
                 }).sheet(isPresented: $showModal ){
                     NewGoalView(isEditing: isEditing)
-                        .presentationDetents([.height(500)])
+                        .presentationDetents([.height(550)])
                         .presentationCornerRadius(30)
                         .presentationDragIndicator(.visible)
                 }

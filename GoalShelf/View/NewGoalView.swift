@@ -15,6 +15,7 @@ struct NewGoalView: View {
     @Environment (\.dismiss) private var dismiss
 
     @State public var newGoal: Goal = Goal(type: .education, name: "", adescription: "", tasks: [])
+    @State private var confirmationShown = false
     
     var isEditing:Bool = false
     let textLimit = 35
@@ -26,7 +27,10 @@ struct NewGoalView: View {
             Text("Goal Name").font(.caption).opacity(0.8)
             TextField("Finish the school project", text: $newGoal.name).textFieldStyle(.roundedBorder).onReceive(Just(newGoal.name)) { _ in limitText(textLimit) }
             Text("Goal Description").font(.caption).opacity(0.8)
-            TextField("We're so behind...", text: $newGoal.adescription).textFieldStyle(.roundedBorder)
+            TextField("We're so behind...", text: $newGoal.adescription, axis: .vertical)
+                .lineLimit(5, reservesSpace: true)
+                .textFieldStyle(.roundedBorder)
+            
             
         }.padding()
         
@@ -107,10 +111,9 @@ struct NewGoalView: View {
                 .clipShape(Capsule())
                 .disabled(newGoal.name.isEmpty || newGoal.adescription.isEmpty)
             .opacity(newGoal.name.isEmpty || newGoal.adescription.isEmpty ? 0.5 : 1)
+            
             Button(role: .destructive,action: {
-                deleteGoal(newGoal)
-                dismiss()
-                
+                confirmationShown = true
             }, label: {
                 Text("Delete")
                     .font(.title3)
@@ -118,7 +121,20 @@ struct NewGoalView: View {
                     .textScale(.secondary)
                 
                 
-            }).buttonStyle(.borderedProminent)
+            }).confirmationDialog(
+                "Do you want to delete this element?",
+                 isPresented: $confirmationShown
+            ) {
+                Button(role: .destructive, action: {
+                    withAnimation {
+                        deleteGoal(newGoal)
+                        dismiss()
+                    }
+                }, label:{
+                    Text("Delete")
+                })
+            }
+            .buttonStyle(.borderedProminent)
                 .clipShape(Capsule())
                 .disabled(!isEditing)
             .opacity(!isEditing ? 0 : 1)
