@@ -17,6 +17,7 @@ class Goal: Identifiable{
     var type: GoalEnum
     var name:String
     var adescription:String
+    var isCompleted: Bool
     var tasks: [Task]
     func toggle(_ task:Task) {
         let index:Int? = tasks.firstIndex{$0.id == task.id}
@@ -26,10 +27,11 @@ class Goal: Identifiable{
         }
     }
     
-    init(type: GoalEnum, name: String, adescription: String, tasks: [Task]) {
+    init(type: GoalEnum, name: String, adescription: String, isCompleted: Bool, tasks: [Task]) {
         self.type = type
         self.name = name
         self.adescription = adescription
+        self.isCompleted = false
         self.tasks = tasks
     }
     

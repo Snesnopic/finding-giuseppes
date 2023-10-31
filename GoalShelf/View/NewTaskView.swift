@@ -16,6 +16,7 @@ struct NewTaskView: View {
     let textLimit = 35
     var body: some View {
         
+        NavigationStack{
         VStack(spacing: 10.0){
             HStack {
                 Text("Task Name").font(.caption).opacity(0.8)
@@ -26,9 +27,12 @@ struct NewTaskView: View {
                 Text("Task Description").font(.caption).opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
                 Spacer()
             }
-            TextField("She's gonna make that delicious cake!", text: $newTask.description).textFieldStyle(.roundedBorder)
+            TextField("She's gonna make that delicious cake!", text: $newTask.description, axis: .vertical)
+                .lineLimit(5, reservesSpace: true)
+                .textFieldStyle(.roundedBorder)
+                
             Toggle(isOn: $newTask.repeatable, label: {
-                Text("Repeatable")
+                Text("Recurring")
             })
             
             
@@ -86,10 +90,11 @@ struct NewTaskView: View {
                 }
             }.opacity(newTask.repeatable ? 1.0 : 0.0)
             
-            
-            LabeledStepper("How many weeks (TODO)",value: $newTask.repetitionPermanence).opacity(newTask.repeatable ? 1.0 : 0.0).padding(.vertical)
             Spacer()
             Button(action: {
+                if(newTask.repeatable){
+                    newTask.isCompleted = true
+                }
                 goal.tasks.append(newTask)
                 dismiss()
             }, label: {
@@ -100,13 +105,13 @@ struct NewTaskView: View {
                 
             }).buttonStyle(.borderedProminent)
                 .clipShape(Capsule())
-            .disabled(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty))
-            .opacity(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty) ? 0.5 : 1)
+                .disabled(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty))
+                .opacity(newTask.name.isEmpty || newTask.description.isEmpty || (newTask.repeatable && newTask.notificationDays.isEmpty) ? 0.5 : 1)
             
         }.padding()
         Spacer()
     }
-    
+}
     
     
     
@@ -118,7 +123,7 @@ struct NewTaskView: View {
 }
 
 #Preview {
-    NewTaskView(goal: Goal(type: .special, name: "", adescription: "", tasks: []))
+    NewTaskView(goal: Goal(type: .special, name: "", adescription: "", isCompleted: false, tasks: []))
 }
 
 enum WeekDaysEnum: String, CaseIterable, Codable

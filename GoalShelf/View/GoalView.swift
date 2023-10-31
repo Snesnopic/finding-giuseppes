@@ -16,6 +16,7 @@ struct GoalView: View {
     @State private var goalTypeFilter: GoalEnum? = nil
     @State var selectedGoal: Goal?
     @State private var showModal = false
+    @State private var showAlert = false
     @Query private var allGoals: [Goal]
     
     
@@ -48,8 +49,26 @@ struct GoalView: View {
             ScrollView{
                 if(allGoals.filter({goalTypeFilter == nil || goalTypeFilter == $0.type}).isEmpty){
                     Spacer(minLength: UIScreen.main.bounds.size.height/4)
-                    Image(systemName: "zzz").font(.largeTitle).opacity(0.8)
-                    Text("You have no goals here!").opacity(0.8)
+                    
+                    VStack {
+                        
+                        Text("It looks there are no goals here.").opacity(0.8)
+                        Text("Add some!").opacity(0.8)
+                        Spacer().frame(height: 7)
+                        Button(action: {
+                            showModal.toggle()
+                        }, label: {
+                            Image(systemName: "plus.circle").font(.title3)
+                        }).disabled(isEditing)
+                        .sheet(isPresented: $showModal ){
+                            NewGoalView(isEditing: isEditing)
+                                .presentationDetents([.height(550)])
+                                .presentationCornerRadius(30)
+                                .presentationDragIndicator(.visible)
+                        }
+                        
+                        
+                    }
                     
                 }
                 else
@@ -67,7 +86,7 @@ struct GoalView: View {
                                         Text(goal.name).font(.title2).foregroundStyle(.black)
                                         
                                         Spacer()
-                                        Image(systemName: isEditing ? "pencil.and.scribble" : "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
+                                        Image(systemName: isEditing ? (goal.isCompleted ? "pencil.slash" : "pencil.and.scribble") : "chevron.right").foregroundStyle(.black).frame( alignment: .trailing)
                                         
                                     }.padding(.horizontal)
                                     
@@ -76,11 +95,23 @@ struct GoalView: View {
                             .disabled(isEditing)
                             
                             if(isEditing){
-                                Button(action:{
-                                    selectedGoal = goal
-                                } , label: {
-                                    Color.clear
-                                })
+                                if(!goal.isCompleted){
+                                    Button(action:{
+                                        selectedGoal = goal
+                                    } , label: {
+                                        Color.clear
+                                    })
+                                }
+                                else{
+                                    Button(action:{
+                                        showAlert.toggle()
+                                    } , label: {
+                                        Color.clear
+                                    })
+                                    .alert(isPresented: $showAlert) {
+                                        Alert(title: Text("Goal not editable"), message: Text("You can't edit this goal because your already achieved it."), dismissButton: .default(Text("Ok")))
+                                    }
+                                }
                             }
                         }
                         
