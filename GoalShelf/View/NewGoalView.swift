@@ -95,7 +95,7 @@ struct NewGoalView: View {
                 
             }
             
-            Spacer()
+            
             VStack {
                 Button(action: {
                     addGoal()
@@ -140,7 +140,7 @@ struct NewGoalView: View {
                 .disabled(!isEditing)
                 .opacity(!isEditing ? 0 : 1)
             }
-            Spacer()
+            
         }
     }
     

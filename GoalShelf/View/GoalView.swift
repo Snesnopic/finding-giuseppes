@@ -52,7 +52,7 @@ struct GoalView: View {
                     
                     VStack {
                         
-                        Text("It looks there are no goals here.").opacity(0.8)
+                        Text("It looks like there are no goals here.").opacity(0.8)
                         Text("Add some!").opacity(0.8)
                         Spacer().frame(height: 7)
                         Button(action: {
@@ -95,23 +95,20 @@ struct GoalView: View {
                             .disabled(isEditing)
                             
                             if(isEditing){
-                                if(!goal.isCompleted){
                                     Button(action:{
-                                        selectedGoal = goal
-                                    } , label: {
-                                        Color.clear
-                                    })
-                                }
-                                else{
-                                    Button(action:{
-                                        showAlert.toggle()
+                                        if(goal.isCompleted == false){
+                                            selectedGoal = goal
+                                        }
+                                        else{
+                                            showAlert.toggle()
+                                        }
                                     } , label: {
                                         Color.clear
                                     })
                                     .alert(isPresented: $showAlert) {
                                         Alert(title: Text("Goal not editable"), message: Text("You can't edit this goal because your already achieved it."), dismissButton: .default(Text("Ok")))
                                     }
-                                }
+                                
                             }
                         }
                         
